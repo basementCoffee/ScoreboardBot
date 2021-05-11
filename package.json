@@ -1,0 +1,27 @@
+{
+  "name": "canukbot",
+  "version": "2.0.0",
+  "description": "CANUK scoreboard bot",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brownsycamore/CANUK.git"
+  },
+  "author": "brownsycamore/mongols",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/brownsycamore/CANUK/issues"
+  },
+  "homepage": "https://github.com/brownsycamore/CANUK#readme",
+  "dependencies": {
+    "cron": "^1.8.2",
+    "discord.js": "^12.5.1",
+    "google-auth-library": "^7.0.4",
+    "google-spreadsheet": "^3.1.15",
+    "googleapis": "^67.0.0",
+    "spdl-core": "^1.5.1"
+  }
+}
