@@ -163,7 +163,9 @@ bot.on('message', message => {
 
     } else if (command === 'scores' || command === 'scoreboard' || command === 'leaderboard') {
 
-        message.channel.send("CANUK Bot is currently on " + version);
+        message.channel.send('The scoreboard is updating.');
+        bot.commands.get('scores').execute(message, args, bot);
+
 
     }
 });

@@ -129,7 +129,7 @@ module.exports = {
             scoreboardEmbed.setDescription(description);
             return scoreboardEmbed;
         }
-        console.log('bot2: ' + bot.user.username);
+
         try {
             bot.channels.cache.get('841438933824569375').messages.fetch('841560035926474753').then((x) => {
                 x.edit('Updating scoreboard...').then(() => {
@@ -153,6 +153,27 @@ module.exports = {
             });
         } catch (e) {
             console.log('Cannot find the the scoreboard embed.');
+            bot.channels.cache.get('802467548838625280').send('Oi some idiot deleted the original pinned leaderboard. Make sure you replace the fetch id with the new one in the code!');
+            bot.channels.cache.get('841438933824569375').send.then((x) => {
+                x.edit('Updating scoreboard...').then(() => {
+                    sheet1.loadCells('A1:AL595').then(() => {
+                        x.edit('Updating scoreboard... (20%)');
+                        sheet2.loadCells('A1:AO500').then(() => {
+                            x.edit('Updating scoreboard... (40%)');
+                            sheet3.loadCells('A1:AO500').then(() => {
+                                x.edit('Updating scoreboard... (60%)');
+                                sheet4.loadCells('A1:AL500').then(() => {
+                                    x.edit('Updating scoreboard... (80%)');
+                                    sheet5.loadCells('A1:E500').then(() => {
+                                        x.edit('Scoreboard:');
+                                        x.edit(getScoreboardEmbed());
+                                    })
+                                })
+                            })
+                        })
+                    });
+                });
+            });
         }
     }
 
