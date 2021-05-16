@@ -161,6 +161,10 @@ bot.on('message', message => {
 
         message.channel.send("https://www.youtube.com/watch?v=_Wlsd9mljiU");
 
+    } else if (command === 'scores' || command === 'scoreboard' || command === 'leaderboard') {
+
+        message.channel.send("CANUK Bot is currently on " + version);
+
     }
 });
 
