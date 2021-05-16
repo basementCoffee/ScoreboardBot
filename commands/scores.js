@@ -1,16 +1,28 @@
+require('dotenv').config();
+
+const private_key = process.env.PRIVATE_KEY.replace(/\\n/gm, '\n');
+const client_email = process.env.CLIENT_EMAIL.replace(/\\n/gm, '\n');
+const spreadsheet_id = process.env.SPREADSHEET_ID.replace(/\\n/gm, '\n');
+const private_key_id = process.env.PRIVATE_KEY_ID.replace(/\\n/gm, '\n');
+const token = process.env.TOKEN.replace(/\\n/gm, '\n');
+const prefix = process.env.PREFIX.replace(/\\n/gm, '\n');
+const version = process.env.VERSION.replace(/\\n/gm, '\n');
+const info = process.env.INFO.replace(/\\n/gm, '\n');
+
+
+
 const {
     google,
     GoogleApis
 } = require('googleapis');
-// const { GoogleSpreadsheet } = require('google-spreadsheet');
+
 const {
     GoogleSpreadsheet,
     GoogleSpreadsheetWorksheet
 } = require('google-spreadsheet');
-const key = require('../.env');
 
 // Initialize the sheet
-var doc = new GoogleSpreadsheet('1N_DoscLuWj2AZ90ZEDCQBH5FTFLaU-ZPriVi2ZKHkOo');
+var doc = new GoogleSpreadsheet(spreadsheet_id);
 
 var sheet1;
 var sheet2;
@@ -25,9 +37,10 @@ var sheet5;
 
 async function initializeAuth() {
     await doc.useServiceAccountAuth({
-        client_email: key.client_email,
-        private_key: key.private_key,
+        client_email: client_email,
+        private_key: private_key,
     });
+    
 
     await doc.loadInfo(); // loads document properties and worksheets
     console.log(doc.title); // title of the sheet
@@ -141,9 +154,6 @@ module.exports = {
         } catch (e) {
             console.log('Cannot find the the scoreboard embed.');
         }
-        // message.editchannel.send(scoreboardEmbed);
-
-        //bot.channels.cache.get('802071947088625694').send(helpListEmbed);
     }
 
 }

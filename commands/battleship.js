@@ -1,6 +1,19 @@
+require('dotenv').config();
+
+const private_key = process.env.PRIVATE_KEY.replace(/\\n/gm, '\n');
+const client_email = process.env.CLIENT_EMAIL.replace(/\\n/gm, '\n');
+const spreadsheet_id = process.env.SPREADSHEET_ID.replace(/\\n/gm, '\n');
+const private_key_id = process.env.PRIVATE_KEY_ID.replace(/\\n/gm, '\n');
+const token = process.env.TOKEN.replace(/\\n/gm, '\n');
+const prefix = process.env.PREFIX.replace(/\\n/gm, '\n');
+const version = process.env.VERSION.replace(/\\n/gm, '\n');
+const info = process.env.INFO.replace(/\\n/gm, '\n');
+
+
+
 const {google} = require('googleapis');
-const keys = require('../.env');
 const verification = require('./verification');
+
 module.exports = {
     name: 'battleship',
     description: "battleship commands",
@@ -82,13 +95,11 @@ module.exports = {
 
         }
     }
-
-
 }
 
-const client2 = new google.auth.JWT(
-    keys.client_email, null, keys.private_key, ['https://www.googleapis.com/auth/spreadsheets']
-);
+const client2 = new google.auth.JWT(client_email, null, private_key, [
+    'https://www.googleapis.com/auth/spreadsheets'
+]);
 
 
 async function gsrun(cl) {
@@ -99,26 +110,22 @@ async function gsrun(cl) {
 
 
     const spreadsheetSizeObjects = {
-        spreadsheetId: "1N_DoscLuWj2AZ90ZEDCQBH5FTFLaU-ZPriVi2ZKHkOo",
+        spreadsheetId: spreadsheet_id,
         range: 'BB!B5'
     }
 
     let dataSizeFromSheets = await gsapi.spreadsheets.values.get(spreadsheetSizeObjects);
     const dataSize = dataSizeFromSheets.data.values;
 
-    // console.log("Data Size gsrun: " + dataSize);
 
     const songObjects = {
-        spreadsheetId: "1N_DoscLuWj2AZ90ZEDCQBH5FTFLaU-ZPriVi2ZKHkOo",
+        spreadsheetId: spreadsheet_id,
         range: "BB!A5:B5" + dataSize.toString()
 
     };
 
     let dataSO = await gsapi.spreadsheets.values.get(songObjects);
     const arrayOfSpreadsheetValues = dataSO.data.values;
-    //console.log(arrayOfSpreadsheetValues);
-
-    // console.log("Database size: " + dataSize);
 
 
 }
@@ -132,7 +139,7 @@ async function gsLightRun(columnLetter, startingRowNumber) {
 
 
     const spreadsheetSizeObjects = {
-        spreadsheetId: "1N_DoscLuWj2AZ90ZEDCQBH5FTFLaU-ZPriVi2ZKHkOo",
+        spreadsheetId: spreadsheet_id,
         range: 'BB!' + columnLetter.toString() + 4
     }
 
@@ -152,15 +159,14 @@ function gsUpdateAdd(name, val, columnLetter, nextColumnLetter, startingRowNumbe
 
         const givenRange = columnLetter.toString() + newRowToOverwrite.toString() + ":" + nextColumnLetter.toString() + newRowToOverwrite.toString();
         gsapi.spreadsheets.values.append({
-            "spreadsheetId": "1N_DoscLuWj2AZ90ZEDCQBH5FTFLaU-ZPriVi2ZKHkOo",
+            "spreadsheetId": spreadsheet_id,
             "range": givenRange,
             "includeValuesInResponse": true,
             "responseDateTimeRenderOption": "FORMATTED_STRING",
             "responseValueRenderOption": "FORMATTED_VALUE",
             "valueInputOption": "USER_ENTERED",
             "resource": {
-                //"majorDimension": "COLUMNS",
-                "values": [
+               "values": [
                     [
                         name,
                         val
@@ -176,7 +182,5 @@ function gsUpdateAdd(name, val, columnLetter, nextColumnLetter, startingRowNumbe
                 function (err) {
                     console.error("Execute error", err);
                 });
-
-        // gsUpdateOverwrite(name,val);
     });
 }

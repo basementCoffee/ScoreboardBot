@@ -1,19 +1,22 @@
-const {
-    google,
-    GoogleApis
-} = require('googleapis');
-// const { GoogleSpreadsheet } = require('google-spreadsheet');
-const {
-    GoogleSpreadsheet,
-    GoogleSpreadsheetWorksheet
-} = require('google-spreadsheet');
-const key = require('./.env');
+require('dotenv').config();
+
+//Importing from .env
+const private_key = process.env.PRIVATE_KEY.replace(/\\n/gm, '\n');
+const client_email = process.env.CLIENT_EMAIL.replace(/\\n/gm, '\n');
+const spreadsheet_id = process.env.SPREADSHEET_ID.replace(/\\n/gm, '\n');
+const private_key_id = process.env.PRIVATE_KEY_ID.replace(/\\n/gm, '\n');
+const token = process.env.TOKEN.replace(/\\n/gm, '\n');
+const prefix = process.env.PREFIX.replace(/\\n/gm, '\n');
+const version = process.env.VERSION.replace(/\\n/gm, '\n');
+const info = process.env.INFO.replace(/\\n/gm, '\n');
+
+const {google, GoogleApis} = require('googleapis');
+const {GoogleSpreadsheet, GoogleSpreadsheetWorksheet} = require('google-spreadsheet');
+
+var doc = new GoogleSpreadsheet(spreadsheet_id);
+
 
 // Initialize the sheet
-var doc = new GoogleSpreadsheet('1N_DoscLuWj2AZ90ZEDCQBH5FTFLaU-ZPriVi2ZKHkOo');
-
-const creds = require('./.env'); // the file saved above
-
 var sheet1;
 var sheet2;
 var sheet3;
@@ -27,9 +30,17 @@ var sheet5;
 
 async function initializeAuth() {
     await doc.useServiceAccountAuth({
-        client_email: key.client_email,
-        private_key: key.private_key,
+        client_email: client_email,
+        private_key: private_key,
+    }, function (err) {
+
+        // Get all of the rows from the spreadsheet.
+        doc.getRows(1, function (err, rows) {
+            console.log(rows);
+        });
+        console.log("done");
     });
+
 
     await doc.loadInfo(); // loads document properties and worksheets
     console.log(doc.title); // title of the sheet
@@ -43,13 +54,13 @@ async function initializeAuth() {
     console.log(sheet3.title);
     console.log(sheet4.title);
     console.log(sheet5.title);
-
-
-};
-
+}
 
 // Authenticate with the Google Spreadsheets API.
-doc.useServiceAccountAuth(creds, function (err) {
+doc.useServiceAccountAuth({
+    client_email: client_email,
+    private_key: private_key,
+}, function (err) {
 
     // Get all of the rows from the spreadsheet.
     doc.getRows(1, function (err, rows) {
@@ -62,22 +73,9 @@ doc.useServiceAccountAuth(creds, function (err) {
 // Bot initialization
 const fs = require('fs');
 const Discord = require('discord.js');
-const {
-    prefix,
-    token,
-    version,
-    help,
-    info
-} = require('./.env');
-const {
-    SSL_OP_SSLEAY_080_CLIENT_DH_BUG
-} = require('constants');
-const {
-    gamesConfiguration
-} = require('googleapis/build/src/apis/gamesConfiguration');
-const {
-    sheets
-} = require('googleapis/build/src/apis/sheets');
+const {SSL_OP_SSLEAY_080_CLIENT_DH_BUG} = require('constants');
+const {gamesConfiguration} = require('googleapis/build/src/apis/gamesConfiguration');
+const {sheets} = require('googleapis/build/src/apis/sheets');
 
 const {MessageEmbed, Client} = require('discord.js');
 const bot = new Client();

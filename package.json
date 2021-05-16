@@ -19,6 +19,7 @@
   "dependencies": {
     "cron": "^1.8.2",
     "discord.js": "^12.5.1",
+    "dotenv": "^9.0.2",
     "google-auth-library": "^7.0.4",
     "google-spreadsheet": "^3.1.15",
     "googleapis": "^67.0.0",
