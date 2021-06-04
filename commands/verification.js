@@ -3,11 +3,7 @@ require('dotenv').config();
 const private_key = process.env.PRIVATE_KEY.replace(/\\n/gm, '\n');
 const client_email = process.env.CLIENT_EMAIL.replace(/\\n/gm, '\n');
 const spreadsheet_id = process.env.SPREADSHEET_ID.replace(/\\n/gm, '\n');
-const private_key_id = process.env.PRIVATE_KEY_ID.replace(/\\n/gm, '\n');
-const token = process.env.TOKEN.replace(/\\n/gm, '\n');
-const prefix = process.env.PREFIX.replace(/\\n/gm, '\n');
-const version = process.env.VERSION.replace(/\\n/gm, '\n');
-const info = process.env.INFO.replace(/\\n/gm, '\n');
+
 
 
 

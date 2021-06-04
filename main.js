@@ -4,9 +4,9 @@ require('dotenv').config();
 const private_key = process.env.PRIVATE_KEY.replace(/\\n/gm, '\n');
 const client_email = process.env.CLIENT_EMAIL.replace(/\\n/gm, '\n');
 const spreadsheet_id = process.env.SPREADSHEET_ID.replace(/\\n/gm, '\n');
-const private_key_id = process.env.PRIVATE_KEY_ID.replace(/\\n/gm, '\n');
 const token = process.env.TOKEN.replace(/\\n/gm, '\n');
-const prefix = process.env.PREFIX.replace(/\\n/gm, '\n');
+const prefix = "!canuk ";
+const secondPrefix = "!canuck ";
 const version = process.env.VERSION.replace(/\\n/gm, '\n');
 const info = process.env.INFO.replace(/\\n/gm, '\n');
 
@@ -99,11 +99,20 @@ bot.once('ready', () => {
 //Prefix
 bot.on('message', message => {
     message.content = message.content.toLowerCase();
-    if (!message.content.startsWith(prefix) || message.author.bot) return;
+    if (!message.content.startsWith(prefix || secondPrefix) || message.author.bot)  {
+        return;
+    }
 
+//Args split
+    if (message.content.startsWith(secondPrefix)) {
+        console.log("A")
+        var args = message.content.slice(secondPrefix.length).split(/ +/);
+    }
+    else if (message.content.startsWith(prefix)) {
+        console.log("B")
+        var args = message.content.slice(prefix.length).split(/ +/);
+    }
 
-    //Args split
-    const args = message.content.slice(prefix.length).split(/ +/);
     const command = args.shift().toLowerCase();
 
     bot.user.setActivity("WoWS [!canuk help]");
@@ -166,6 +175,10 @@ bot.on('message', message => {
         message.channel.send('The scoreboard is updating.');
         bot.commands.get('scores').execute(message, args, bot);
 
+
+    } else if (command === 'sheet') {
+
+        message.channel.send("https://docs.google.com/spreadsheets/d/1N_DoscLuWj2AZ90ZEDCQBH5FTFLaU-ZPriVi2ZKHkOo/edit?usp=sharing");
 
     }
 });

@@ -3,11 +3,7 @@ require('dotenv').config();
 const private_key = process.env.PRIVATE_KEY.replace(/\\n/gm, '\n');
 const client_email = process.env.CLIENT_EMAIL.replace(/\\n/gm, '\n');
 const spreadsheet_id = process.env.SPREADSHEET_ID.replace(/\\n/gm, '\n');
-const private_key_id = process.env.PRIVATE_KEY_ID.replace(/\\n/gm, '\n');
-const token = process.env.TOKEN.replace(/\\n/gm, '\n');
-const prefix = process.env.PREFIX.replace(/\\n/gm, '\n');
-const version = process.env.VERSION.replace(/\\n/gm, '\n');
-const info = process.env.INFO.replace(/\\n/gm, '\n');
+
 
 
 
@@ -53,6 +49,7 @@ module.exports = {
       let valueDifferenceNewHS = entryValue - highScore;
       if (highScore > entryValue) {
         message.channel.send('Sorry ' + commanderName + ', you are ' + Math.abs(valueDifferenceHS) + ' from the current high score!');
+        gsUpdateAdd(commanderName, entryValue, sheetCol1, sheetCol2, 10);
       } else if (highScore < entryValue) {
         message.channel.send('Well done ' + commanderName + '! Your entry is the new high score by a margin of ' + Math.abs(valueDifferenceNewHS) + '!\nThis high score has been forwarded to a commander for verification.');
         verification.execute(message, args, Discord, bot, {
@@ -63,12 +60,17 @@ module.exports = {
           startingRowNumber: 10,
           sheetName: 'Universal'
         });
-        return;
-      } else {
+      } else if (highScore === entryValue) {
         message.channel.send("It's a tie!");
+        verification.execute(message, args, Discord, bot, {
+          commanderName,
+          val: entryValue,
+          sheetCol1,
+          sheetCol2,
+          startingRowNumber: 10,
+          sheetName: 'DD'
+        });
       }
-      gsUpdateAdd(commanderName, entryValue, sheetCol1, sheetCol2, 10);
-
     }
 
     function addEntryToSheetKILLSTEAL(sheetCol1, sheetCol2) {
@@ -80,6 +82,7 @@ module.exports = {
       let valueDifferenceNewHS = highScore - entryValue;
       if (entryValue > highScore) {
         message.channel.send('Sorry ' + commanderName + ', you are ' + Math.abs(valueDifferenceHS) + ' from the current high score!');
+        gsUpdateAdd(commanderName, entryValue, sheetCol1, sheetCol2, 10);
       } else if (entryValue < highScore) {
         message.channel.send('Well done ' + commanderName + '! Your entry is the new high score by a margin of ' + Math.abs(valueDifferenceNewHS) + '!\nThis high score has been forwarded to a commander for verification.');
         verification.execute(message, args, Discord, bot, {
@@ -90,20 +93,22 @@ module.exports = {
           startingRowNumber: 10,
           sheetName: 'Universal'
         });
-        return;
-      } else {
+
+      }else if (highScore === entryValue) {
         message.channel.send("It's a tie!");
+        verification.execute(message, args, Discord, bot, {
+          commanderName,
+          val: entryValue,
+          sheetCol1,
+          sheetCol2,
+          startingRowNumber: 10,
+          sheetName: 'Universal'
+        });
       }
-      gsUpdateAdd(commanderName, entryValue, sheetCol1, sheetCol2, 10);
+
 
     }
-
-
-
-
   }
-
-
 }
 
 const client2 = new google.auth.JWT(client_email, null, private_key, [

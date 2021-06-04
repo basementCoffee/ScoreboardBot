@@ -3,11 +3,7 @@ require('dotenv').config();
 const private_key = process.env.PRIVATE_KEY.replace(/\\n/gm, '\n');
 const client_email = process.env.CLIENT_EMAIL.replace(/\\n/gm, '\n');
 const spreadsheet_id = process.env.SPREADSHEET_ID.replace(/\\n/gm, '\n');
-const private_key_id = process.env.PRIVATE_KEY_ID.replace(/\\n/gm, '\n');
-const token = process.env.TOKEN.replace(/\\n/gm, '\n');
-const prefix = process.env.PREFIX.replace(/\\n/gm, '\n');
-const version = process.env.VERSION.replace(/\\n/gm, '\n');
-const info = process.env.INFO.replace(/\\n/gm, '\n');
+
 
 
 
@@ -22,7 +18,7 @@ module.exports = {
     let entryValue;
     let commanderName = (message.member.nickname ? message.member.nickname : message.member.user.username);
 
-    let allowedWords = ['damage', 'dmg', 'kill', 'kills', 'bxp', 'base-xp', 'cits',
+    let allowedWords = ['damage', 'dmg', 'kill', 'kills', 'bxp', 'base-xp', 'cit', 'cits',
       'citadel', 'fires', 'fire', 'floods', 'torps', 'planes', 'incaps', 'incap', 'N/A', 'target-hits', 'targets',
       't7bxp', 't7dmg'];
 
@@ -40,7 +36,7 @@ module.exports = {
       addEntryToSheet('D', 'E');
     } else if (type === 'base-xp' || type === 'bxp') {
       addEntryToSheet('G', 'H');
-    } else if (type === 'citadel' || type === 'cits') {
+    } else if (type === 'citadel' || type === 'cits' || type === 'cit') {
       addEntryToSheet('J', 'K');
     } else if (type === 'fires' || type === 'fire') {
       addEntryToSheet('M', 'N');
@@ -77,6 +73,7 @@ module.exports = {
       let valueDifferenceNewHS = entryValue - highScore;
       if (highScore > entryValue) {
         message.channel.send('Sorry ' + commanderName + ', you are ' + Math.abs(valueDifferenceHS) + ' from the current high score!');
+        gsUpdateAdd(commanderName, entryValue, sheetCol1, sheetCol2, 10);
       } else if (highScore < entryValue) {
         message.channel.send('Well done ' + commanderName + '! Your entry is the new high score by a margin of ' + Math.abs(valueDifferenceNewHS) + '!\nThis high score has been forwarded to a commander for verification.');
         verification.execute(message, args, Discord, bot, {
@@ -87,16 +84,19 @@ module.exports = {
           startingRowNumber: 10,
           sheetName: 'CV'
         });
-        return;
-      } else {
+      }  else if (highScore === entryValue) {
         message.channel.send("It's a tie!");
+        verification.execute(message, args, Discord, bot, {
+          commanderName,
+          val: entryValue,
+          sheetCol1,
+          sheetCol2,
+          startingRowNumber: 10,
+          sheetName: 'CV'
+        });
       }
-      gsUpdateAdd(commanderName, entryValue, sheetCol1, sheetCol2, 10);
-
     }
   }
-
-
 }
 
 const client2 = new google.auth.JWT(client_email, null, private_key, [

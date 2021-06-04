@@ -3,14 +3,6 @@ require('dotenv').config();
 const private_key = process.env.PRIVATE_KEY;
 const client_email = process.env.CLIENT_EMAIL;
 const spreadsheet_id = process.env.CLIENT_EMAIL;
-const private_key_id = process.env.PRIVATE_KEY_ID;
-const token = process.env.TOKEN;
-const prefix = process.env.PREFIX;
-const version = process.env.VERSION;
-const info = process.env.INFO;
-
-
-
 const {google} = require('googleapis');
 const verification = require('./verification');
 
@@ -23,7 +15,7 @@ module.exports = {
       let commanderName = (message.member.nickname ? message.member.nickname : message.member.user.username);
 
      let allowedWords = ['damage', 'dmg', 'kill', 'kills', 'bxp', 'base-xp', 'fires', 'fire', 'floods',
-      'flood', 'torps', 'torp', 'cits', 'mbh', 'tanked', 'tanked-dmg', 'planes', 'plane-kills', 'incaps',
+      'flood', 'torps', 'torp', 'cit', 'cits', 'mbh', 'tanked', 'tanked-dmg', 'planes', 'plane-kills', 'incaps',
       'incap', 'caps', 'defended', 'assists', 'spotting', 'spotting-dmg', 't7bxp', 't7dmg'];
 
       if (allowedWords.includes(args[0])) {
@@ -79,6 +71,7 @@ module.exports = {
       let valueDifferenceNewHS = entryValue - highScore;
       if (highScore > entryValue) {
         message.channel.send('Sorry ' + commanderName + ', you are ' + Math.abs(valueDifferenceHS) + ' from the current high score!');
+        gsUpdateAdd(commanderName, entryValue, sheetCol1, sheetCol2, 10);
       } else if (highScore < entryValue) {
         message.channel.send('Well done ' + commanderName + '! Your entry is the new high score by a margin of ' + Math.abs(valueDifferenceNewHS) + '!\nThis high score has been forwarded to a commander for verification.');
         verification.execute(message, args, Discord, bot, {
@@ -89,16 +82,19 @@ module.exports = {
           startingRowNumber: 10,
           sheetName: 'DD'
         });
-        return;
-      } else {
-        message.channel.send("It's a tie!");
+      }  else if (highScore === entryValue) {
+          message.channel.send("It's a tie!");
+          verification.execute(message, args, Discord, bot, {
+            commanderName,
+            val: entryValue,
+            sheetCol1,
+            sheetCol2,
+            startingRowNumber: 10,
+            sheetName: 'DD'
+          });
       }
-      gsUpdateAdd(commanderName, entryValue, sheetCol1, sheetCol2, 10);
-
     }
   }
-
-
 }
 
 const client2 = new google.auth.JWT(client_email, null, private_key, [
