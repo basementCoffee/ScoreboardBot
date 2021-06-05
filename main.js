@@ -5,8 +5,8 @@ const private_key = process.env.PRIVATE_KEY.replace(/\\n/gm, '\n');
 const client_email = process.env.CLIENT_EMAIL.replace(/\\n/gm, '\n');
 const spreadsheet_id = process.env.SPREADSHEET_ID.replace(/\\n/gm, '\n');
 const token = process.env.TOKEN.replace(/\\n/gm, '\n');
-const prefix = "!canuk ";
-const secondPrefix = "!canuck ";
+//const prefixes = ('!canuk ', '!canuck ');
+//const secondPrefix = "!canuck ";
 const version = process.env.VERSION.replace(/\\n/gm, '\n');
 const info = process.env.INFO.replace(/\\n/gm, '\n');
 
@@ -95,22 +95,24 @@ bot.once('ready', () => {
     console.log('CANUK Bot is online!');
 });
 
+const firstPrefix = '!canuk ';
+const secondPrefix = '!canuck ';
 
 //Prefix
 bot.on('message', message => {
     message.content = message.content.toLowerCase();
-    if (!message.content.startsWith(prefix || secondPrefix) || message.author.bot)  {
+    if (message.author.bot || (!message.content.startsWith(firstPrefix) && !message.content.startsWith(secondPrefix))) {
         return;
     }
 
 //Args split
-    if (message.content.startsWith(secondPrefix)) {
-        console.log("A")
-        var args = message.content.slice(secondPrefix.length).split(/ +/);
+    if (message.content.startsWith(firstPrefix)) {
+        //console.log("A")
+        var args = message.content.slice(firstPrefix.length).split(/ +/);
     }
-    else if (message.content.startsWith(prefix)) {
-        console.log("B")
-        var args = message.content.slice(prefix.length).split(/ +/);
+    else if (message.content.startsWith(secondPrefix)) {
+        //console.log("B")
+        var args = message.content.slice(secondPrefix.length).split(/ +/);
     }
 
     const command = args.shift().toLowerCase();
