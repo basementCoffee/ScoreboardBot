@@ -50,7 +50,7 @@ module.exports = {
                     console.log('bot1: ' + bot.user.username);
                     bot.commands.get('scores').execute(message, args, bot);
 
-                    message.channel.send('Added to sheet. #leaderboard is updated.');
+                    message.channel.send('Added to sheet. #leaderboard-scores is updated.');
                     // bot-testing channel id: 802071947088625694;    embed id: 841537152910491659; leaderboard channel id: 841438933824569375
 
                 } else {
