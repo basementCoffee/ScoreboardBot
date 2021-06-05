@@ -5,15 +5,34 @@ const private_key = process.env.PRIVATE_KEY.replace(/\\n/gm, '\n');
 const client_email = process.env.CLIENT_EMAIL.replace(/\\n/gm, '\n');
 const spreadsheet_id = process.env.SPREADSHEET_ID.replace(/\\n/gm, '\n');
 const token = process.env.TOKEN.replace(/\\n/gm, '\n');
-//const prefixes = ('!canuk ', '!canuck ');
-//const secondPrefix = "!canuck ";
 const version = process.env.VERSION.replace(/\\n/gm, '\n');
 const info = process.env.INFO.replace(/\\n/gm, '\n');
 
+//Google stuff
 const {google, GoogleApis} = require('googleapis');
 const {GoogleSpreadsheet, GoogleSpreadsheetWorksheet} = require('google-spreadsheet');
-
 var doc = new GoogleSpreadsheet(spreadsheet_id);
+
+
+const Discord = require('discord.js');
+
+//Button testing
+//const discord = require('discord.js'); // Define / Require the discord.js module.
+const buttonClient = new Discord.Client(); // Creating a discord.js client instance (constructor).
+const disbut = require('discord-buttons');
+disbut(buttonClient); // Requiring discord-buttons and binding it to the initialised client.
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 // Initialize the sheet
@@ -23,7 +42,7 @@ var sheet3;
 var sheet4;
 var sheet5;
 
-
+//Google login/auth
 (async function () {
     await initializeAuth();
 }());
@@ -72,7 +91,7 @@ doc.useServiceAccountAuth({
 
 // Bot initialization
 const fs = require('fs');
-const Discord = require('discord.js');
+
 const {SSL_OP_SSLEAY_080_CLIENT_DH_BUG} = require('constants');
 const {gamesConfiguration} = require('googleapis/build/src/apis/gamesConfiguration');
 const {sheets} = require('googleapis/build/src/apis/sheets');
@@ -158,7 +177,7 @@ bot.on('message', message => {
 
     } else if (command === 'version') {
 
-        message.channel.send("CANUK Bot is currently on " + version);
+        message.channel.send("CANUK Bot is currently on V2.2.2");
 
     } else if (command === 'info') {
 
@@ -180,7 +199,13 @@ bot.on('message', message => {
 
     } else if (command === 'sheet') {
 
-        message.channel.send("https://docs.google.com/spreadsheets/d/1N_DoscLuWj2AZ90ZEDCQBH5FTFLaU-ZPriVi2ZKHkOo/edit?usp=sharing");
+        let button = new disbut.MessageButton()
+            .setStyle('url')
+            .setURL('https://docs.google.com/spreadsheets/d/1N_DoscLuWj2AZ90ZEDCQBH5FTFLaU-ZPriVi2ZKHkOo/edit?usp=sharing')
+            .setLabel('Holy Sheet')
+            //.setDisabled();
+
+        message.channel.send('Click me!', button);
 
     }
 });
