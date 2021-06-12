@@ -1,6 +1,6 @@
 {
   "name": "canukbot",
-  "version": "2.3.0",
+  "version": "2.3.1",
   "description": "CANUK scoreboard bot",
   "main": "main.js",
   "scripts": {
@@ -25,5 +25,8 @@
     "google-spreadsheet": "^3.1.15",
     "googleapis": "^67.0.0",
     "spdl-core": "^1.5.1"
+  },
+  "devDependencies": {
+    "prettier": "^2.3.1"
   }
 }
