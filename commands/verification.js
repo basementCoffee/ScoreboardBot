@@ -48,7 +48,11 @@ module.exports = {
                     console.log(data.sheetName);
                     gsUpdateAdd(data.commanderName, data.val, data.sheetCol1, data.sheetCol2, data.startingRowNumber, data.sheetName);
                     console.log('bot1: ' + bot.user.username);
-                    bot.commands.get('scores').execute(message, args, bot);
+                    bot.commands.get('bbscores').execute(message, args, bot);
+                    bot.commands.get('ddscores').execute(message, args, bot);
+                    bot.commands.get('cruiserscores').execute(message, args, bot);
+                    bot.commands.get('cvscores').execute(message, args, bot);
+                    bot.commands.get('universalscores').execute(message, args, bot);
 
                     message.channel.send('Added to sheet. #leaderboard-scores is updated.');
                     // bot-testing channel id: 802071947088625694;    embed id: 841537152910491659; leaderboard channel id: 841438933824569375

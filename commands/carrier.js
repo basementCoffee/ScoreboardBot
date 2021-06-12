@@ -72,8 +72,10 @@ module.exports = {
       let valueDifferenceHS = highScore - entryValue;
       let valueDifferenceNewHS = entryValue - highScore;
       if (highScore > entryValue) {
+
         message.channel.send('Sorry ' + commanderName + ', you are ' + Math.abs(valueDifferenceHS) + ' from the current high score!');
         gsUpdateAdd(commanderName, entryValue, sheetCol1, sheetCol2, 10);
+
       } else if (highScore < entryValue) {
         message.channel.send('Well done ' + commanderName + '! Your entry is the new high score by a margin of ' + Math.abs(valueDifferenceNewHS) + '!\nThis high score has been forwarded to a commander for verification.');
         verification.execute(message, args, Discord, bot, {
@@ -84,7 +86,8 @@ module.exports = {
           startingRowNumber: 10,
           sheetName: 'CV'
         });
-      }  else if (highScore === entryValue) {
+
+      } else if (highScore === entryValue) {
         message.channel.send("It's a tie!");
         verification.execute(message, args, Discord, bot, {
           commanderName,

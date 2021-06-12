@@ -193,8 +193,12 @@ bot.on('message', message => {
 
     } else if (command === 'scores' || command === 'scoreboard' || command === 'leaderboard') {
 
-        message.channel.send('The scoreboard is updating.');
-        bot.commands.get('scores').execute(message, args, bot);
+        message.channel.send('The scoreboards are updating.');
+        bot.commands.get('bbscores').execute(message, args, bot);
+        bot.commands.get('ddscores').execute(message, args, bot);
+        bot.commands.get('cruiserscores').execute(message, args, bot);
+        bot.commands.get('cvscores').execute(message, args, bot);
+        bot.commands.get('universalscores').execute(message, args, bot);
 
 
     } else if (command === 'sheet') {
@@ -207,7 +211,14 @@ bot.on('message', message => {
 
         message.channel.send('Click me!', button);
 
-    }
+    } //else if (command === 'add') {
+
+        //bot.channels.cache.get('841438933824569375').send("Dont delete me 2");
+        //bot.channels.cache.get('841438933824569375').send("Dont delete me 3");
+        //bot.channels.cache.get('841438933824569375').send("Dont delete me 4");
+        //bot.channels.cache.get('841438933824569375').send("Dont delete me 5");
+
+    //}
 });
 
 
