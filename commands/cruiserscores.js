@@ -57,7 +57,7 @@ module.exports = {
                 '\n-----------  **CRUISER**  -----------\n' +
                 '\`DAMAGE:\`' + sheet2.getCellByA1('B6').formattedValue + ' (' + abbreviateNumber(sheet2.getCellByA1('B5').formattedValue) + ') \n' +
                 '\`KILLS:\`' + sheet2.getCellByA1('E6').formattedValue + ' (' + abbreviateNumber(sheet2.getCellByA1('E5').formattedValue) + ') \n' +
-                '\`BXP:\`' + sheet2.getCellByA1('H6').formattedValue + ' (' + abbreviateNumber(sheet2.getCellByA1('H5').formattedValue) + ') \n' +
+                '\`BXP:\`' + sheet2.getCellByA1('H6').formattedValue + ' (' + sheet2.getCellByA1('H5').formattedValue + ') \n' +
                 '\`FIRES:\`' + sheet2.getCellByA1('K6').formattedValue + ' (' + abbreviateNumber(sheet2.getCellByA1('K5').formattedValue) + ') \n' +
                 '\`FLOODS:\`' + sheet2.getCellByA1('N6').formattedValue + ' (' + abbreviateNumber(sheet2.getCellByA1('N5').formattedValue) + ') \n' +
                 '\`TORPS:\`' + sheet2.getCellByA1('Q6').formattedValue + ' (' + abbreviateNumber(sheet2.getCellByA1('Q5').formattedValue) + ') \n' +
@@ -67,7 +67,7 @@ module.exports = {
                 '\`AIRPLANE KILLS:\`' + sheet2.getCellByA1('AC6').formattedValue + ' (' + abbreviateNumber(sheet2.getCellByA1('AC5').formattedValue) + ') \n' +
                 '\`INCAPACITATIONS:\`' + sheet2.getCellByA1('AF6').formattedValue + ' (' + abbreviateNumber(sheet2.getCellByA1('AF5').formattedValue) + ') \n' +
                 '\`CAP/DEFENDED/ASSISTS:\`' + sheet2.getCellByA1('AI6').formattedValue + ' (' + abbreviateNumber(sheet2.getCellByA1('AI5').formattedValue) + ') \n' +
-                '\`BASE-XP (≤T7):\`' + sheet2.getCellByA1('AL6').formattedValue + ' (' + abbreviateNumber(sheet2.getCellByA1('AL5').formattedValue) + ') \n' +
+                '\`BASE-XP (≤T7):\`' + sheet2.getCellByA1('AL6').formattedValue + ' (' + sheet2.getCellByA1('AL5').formattedValue + ') \n' +
                 '\`DAMAGE (≤T7):\`' + sheet2.getCellByA1('AO6').formattedValue + ' (' + abbreviateNumber(sheet2.getCellByA1('AO5').formattedValue) + ') \n'
             ;
             cruiserScoreBoardEmbed.setTitle('[CANUK] Cruiser LEADERBOARD');

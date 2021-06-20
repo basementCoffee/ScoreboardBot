@@ -55,7 +55,7 @@ module.exports = {
             const universalScoreBoardEmbed = new MessageEmbed();
             const description =
                 '\n-----------  **UNIVERSAL CATEGORIES**  -----------\n' +
-                '\`BXP (CO-OP):\`' + sheet5.getCellByA1('B6').formattedValue + ' (' + abbreviateNumber(sheet5.getCellByA1('B5').formattedValue) + ') \n' +
+                '\`BXP (CO-OP):\`' + sheet5.getCellByA1('B6').formattedValue + ' (' + sheet5.getCellByA1('B5').formattedValue + ') \n' +
                 '\`KILL STEALS:\`' + sheet5.getCellByA1('E6').formattedValue + ' (' + abbreviateNumber(sheet5.getCellByA1('E5').formattedValue) + ') \n'
             ;
             universalScoreBoardEmbed.setTitle('[CANUK] Universal Categories LEADERBOARD');

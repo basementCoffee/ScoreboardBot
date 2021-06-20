@@ -57,7 +57,7 @@ module.exports = {
                 '-------------  **BATTLESHIP** -------------\n' +
                 '\`DAMAGE:\`' + sheet1.getCellByA1('B6').formattedValue + ' (' + abbreviateNumber(sheet1.getCellByA1('B5').formattedValue) + ') \n' +
                 '\`KILLS:\`' + sheet1.getCellByA1('E6').formattedValue + ' (' + abbreviateNumber(sheet1.getCellByA1('E5').formattedValue) + ') \n' +
-                '\`BXP:\`' + sheet1.getCellByA1('H6').formattedValue + ' (' + abbreviateNumber(sheet1.getCellByA1('H5').formattedValue) + ') \n' +
+                '\`BXP:\`' + sheet1.getCellByA1('H6').formattedValue + ' (' + sheet1.getCellByA1('H5').formattedValue + ') \n' +
                 '\`SECONDARY HITS:\`' + sheet1.getCellByA1('K6').formattedValue + ' (' + abbreviateNumber(sheet1.getCellByA1('K5').formattedValue) + ') \n' +
                 '\`CITADELS:\`' + sheet1.getCellByA1('N6').formattedValue + ' (' + abbreviateNumber(sheet1.getCellByA1('N5').formattedValue) + ') \n' +
                 '\`MBH:\`' + sheet1.getCellByA1('Q6').formattedValue + ' (' + abbreviateNumber(sheet1.getCellByA1('Q5').formattedValue) + ') \n' +
@@ -66,7 +66,7 @@ module.exports = {
                 '\`FIRES:\`' + sheet1.getCellByA1('Z6').formattedValue + ' (' + abbreviateNumber(sheet1.getCellByA1('Z5').formattedValue) + ') \n' +
                 '\`CAPS/DEFENDED/ASSIST:\`' + sheet1.getCellByA1('AC6').formattedValue + ' (' + abbreviateNumber(sheet1.getCellByA1('AC5').formattedValue) + ') \n' +
                 '\`INCAPACITATIONS:\`' + sheet1.getCellByA1('AF6').formattedValue + ' (' + abbreviateNumber(sheet1.getCellByA1('AF5').formattedValue) + ') \n' +
-                '\`BASE-XP (≤T7):\`' + sheet1.getCellByA1('AI6').formattedValue + ' (' + abbreviateNumber(sheet1.getCellByA1('AI5').formattedValue) + ') \n' +
+                '\`BASE-XP (≤T7):\`' + sheet1.getCellByA1('AI6').formattedValue + ' (' + sheet1.getCellByA1('AI5').formattedValue + ') \n' +
                 '\`DAMAGE (≤T7):\`' + sheet1.getCellByA1('AL6').formattedValue + ' (' + abbreviateNumber(sheet1.getCellByA1('AL5').formattedValue) + ') \n'
             ;
             bbScoreBoardEmbed.setTitle('[CANUK] BB LEADERBOARD');

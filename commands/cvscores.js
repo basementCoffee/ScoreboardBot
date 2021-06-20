@@ -57,7 +57,7 @@ module.exports = {
                 '\n-----------  **CARRIER**  -----------\n' +
                 '\`DAMAGE:\`' + sheet4.getCellByA1('B6').formattedValue + ' (' + abbreviateNumber(sheet4.getCellByA1('B5').formattedValue) + ') \n' +
                 '\`KILLS:\`' + sheet4.getCellByA1('E6').formattedValue + ' (' + abbreviateNumber(sheet4.getCellByA1('E5').formattedValue) + ') \n' +
-                '\`BXP:\`' + sheet4.getCellByA1('H6').formattedValue + ' (' + abbreviateNumber(sheet4.getCellByA1('H5').formattedValue) + ') \n' +
+                '\`BXP:\`' + sheet4.getCellByA1('H6').formattedValue + ' (' + sheet4.getCellByA1('H5').formattedValue + ') \n' +
                 '\`CITADELS:\`' + sheet4.getCellByA1('K6').formattedValue + ' (' + abbreviateNumber(sheet4.getCellByA1('K5').formattedValue) + ') \n' +
                 '\`FIRES:\`' + sheet4.getCellByA1('N6').formattedValue + ' (' + abbreviateNumber(sheet4.getCellByA1('N5').formattedValue) + ') \n' +
                 '\`FLOODS:\`' + sheet4.getCellByA1('Q6').formattedValue + ' (' + abbreviateNumber(sheet4.getCellByA1('Q5').formattedValue) + ') \n' +
@@ -65,7 +65,7 @@ module.exports = {
                 '\`AIRPLANE KILLS:\`' + sheet4.getCellByA1('W6').formattedValue + ' (' + abbreviateNumber(sheet4.getCellByA1('W5').formattedValue) + ') \n' +
                 '\`INCAPACITATIONS:\`' + sheet4.getCellByA1('Z6').formattedValue + ' (' + abbreviateNumber(sheet4.getCellByA1('Z5').formattedValue) + ') \n' +
                 '\`TARGET HITS:\`' + sheet4.getCellByA1('AF6').formattedValue + ' (' + abbreviateNumber(sheet4.getCellByA1('AF5').formattedValue) + ') \n' +
-                '\`BASE-XP (≤T7):\`' + sheet4.getCellByA1('AI6').formattedValue + ' (' + abbreviateNumber(sheet4.getCellByA1('AI5').formattedValue) + ') \n' +
+                '\`BASE-XP (≤T7):\`' + sheet4.getCellByA1('AI6').formattedValue + ' (' + sheet4.getCellByA1('AI5').formattedValue + ') \n' +
                 '\`DAMAGE (≤T7):\`' + sheet4.getCellByA1('AL6').formattedValue + ' (' + abbreviateNumber(sheet4.getCellByA1('AL5').formattedValue) + ') \n'
             ;
             cvScoreBoardEmbed.setTitle('[CANUK] CV LEADERBOARD');
