@@ -4,8 +4,6 @@ const private_key = process.env.PRIVATE_KEY.replace(/\\n/gm, '\n');
 const client_email = process.env.CLIENT_EMAIL.replace(/\\n/gm, '\n');
 const spreadsheet_id = process.env.SPREADSHEET_ID.replace(/\\n/gm, '\n');
 
-
-
 const {
     google,
     GoogleApis
@@ -100,8 +98,6 @@ module.exports = {
             })
         }
     }
-
-
 }
 
 

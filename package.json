@@ -1,6 +1,6 @@
 {
   "name": "canukbot",
-  "version": "2.3.1",
+  "version": "2.4.0",
   "description": "CANUK scoreboard bot",
   "main": "main.js",
   "scripts": {

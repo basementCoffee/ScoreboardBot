@@ -23,18 +23,6 @@ const disbut = require('discord-buttons');
 disbut(buttonClient); // Requiring discord-buttons and binding it to the initialised client.
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 // Initialize the sheet
 var sheet1;
 var sheet2;
@@ -223,4 +211,3 @@ bot.on('message', message => {
 
 
 bot.login(token);
-
