@@ -3,7 +3,7 @@ require('dotenv').config();
 const private_key = process.env.PRIVATE_KEY.replace(/\\n/gm, '\n');
 const client_email = process.env.CLIENT_EMAIL.replace(/\\n/gm, '\n');
 const spreadsheet_id = process.env.SPREADSHEET_ID.replace(/\\n/gm, '\n');
-
+const {sendHighScoreMessage, sendNotHighScoreMessage} = require('./utils/utils')
 
 
 const {google} = require('googleapis');
@@ -63,7 +63,7 @@ module.exports = {
          * @param sheetCol1 The name column letter
          * @param sheetCol2 The value column letter
          */
-        function addEntryToSheet(sheetCol1, sheetCol2) {
+        async function addEntryToSheet(sheetCol1, sheetCol2) {
             // Change below for each type
             let highScore = sheet1.getCellByA1(sheetCol2 + 5).formattedValue;
             highScore = parseInt(highScore);
@@ -71,17 +71,18 @@ module.exports = {
             let valueDifferenceHS = highScore - entryValue;
             let valueDifferenceNewHS = entryValue - highScore;
             if (highScore > entryValue) {
-                message.channel.send('Sorry ' + commanderName + ', you are ' + Math.abs(valueDifferenceHS) + ' from the current high score!');
+                sendNotHighScoreMessage(message, commanderName, valueDifferenceHS);
                 gsUpdateAdd(commanderName, entryValue, sheetCol1, sheetCol2, 10);
             } else if (highScore < entryValue) {
-                message.channel.send('Well done ' + commanderName + '! Your entry is the new high score by a margin of ' + Math.abs(valueDifferenceNewHS) + '!\nThis high score has been forwarded to a commander for verification.');
+                let prevMessage = await sendHighScoreMessage(message, commanderName, valueDifferenceNewHS);
                 verification.execute(message, args, Discord, bot, {
                     commanderName,
                     val: entryValue,
                     sheetCol1,
                     sheetCol2,
                     startingRowNumber: 10,
-                    sheetName: 'BB'
+                    sheetName: 'BB',
+                    prevMessage
                 });
 
             } else if (highScore === entryValue) {

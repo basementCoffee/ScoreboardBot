@@ -1,20 +1,20 @@
 require('dotenv').config();
-
+let version = require('./package.json').version;
 //Importing from .env
 const private_key = process.env.PRIVATE_KEY.replace(/\\n/gm, '\n');
 const client_email = process.env.CLIENT_EMAIL.replace(/\\n/gm, '\n');
 const spreadsheet_id = process.env.SPREADSHEET_ID.replace(/\\n/gm, '\n');
 const token = process.env.TOKEN.replace(/\\n/gm, '\n');
-const version = process.env.VERSION.replace(/\\n/gm, '\n');
-const info = process.env.INFO.replace(/\\n/gm, '\n');
+
 
 //Google stuff
-const {google, GoogleApis} = require('googleapis');
+const {GoogleApis} = require('googleapis');
 const {GoogleSpreadsheet, GoogleSpreadsheetWorksheet} = require('google-spreadsheet');
 var doc = new GoogleSpreadsheet(spreadsheet_id);
 
 
 const Discord = require('discord.js');
+require('discord-reply');
 
 //Button testing
 //const discord = require('discord.js'); // Define / Require the discord.js module.
@@ -43,9 +43,7 @@ async function initializeAuth() {
 
         // Get all of the rows from the spreadsheet.
         doc.getRows(1, function (err, rows) {
-            console.log(rows);
         });
-        console.log("done");
     });
 
 
@@ -71,18 +69,12 @@ doc.useServiceAccountAuth({
 
     // Get all of the rows from the spreadsheet.
     doc.getRows(1, function (err, rows) {
-        console.log(rows);
     });
-    console.log("done");
 });
 
 
 // Bot initialization
 const fs = require('fs');
-
-const {SSL_OP_SSLEAY_080_CLIENT_DH_BUG} = require('constants');
-const {gamesConfiguration} = require('googleapis/build/src/apis/gamesConfiguration');
-const {sheets} = require('googleapis/build/src/apis/sheets');
 
 const {MessageEmbed, Client} = require('discord.js');
 const bot = new Client();
@@ -100,11 +92,11 @@ for (const file of commandFiles) {
 //Console log on wake
 bot.once('ready', () => {
     console.log('CANUK Bot is online!');
+    bot.user.setActivity("WoWS | !canuk help", {type:"PLAYING"});
 });
 
 const firstPrefix = '!canuk ';
 const secondPrefix = '!canuck ';
-
 //Prefix
 bot.on('message', message => {
     message.content = message.content.toLowerCase();
@@ -114,17 +106,16 @@ bot.on('message', message => {
 
 //Args split
     if (message.content.startsWith(firstPrefix)) {
-        //console.log("A")
         var args = message.content.slice(firstPrefix.length).split(/ +/);
-    }
-    else if (message.content.startsWith(secondPrefix)) {
-        //console.log("B")
+    } else if (message.content.startsWith(secondPrefix)) {
         var args = message.content.slice(secondPrefix.length).split(/ +/);
     }
 
     const command = args.shift().toLowerCase();
 
-    bot.user.setActivity("WoWS [!canuk help]");
+    if (command === 'version') return message.channel.send((new MessageEmbed()).setTitle('Version').setDescription(`[${version}](https://github.com/basementCoffee/ScoreboardBot)`));
+
+
 
 
     //Commands
@@ -195,16 +186,16 @@ bot.on('message', message => {
             .setStyle('url')
             .setURL('https://docs.google.com/spreadsheets/d/1N_DoscLuWj2AZ90ZEDCQBH5FTFLaU-ZPriVi2ZKHkOo/edit?usp=sharing')
             .setLabel('Holy Sheet')
-            //.setDisabled();
+        //.setDisabled();
 
         message.channel.send('Click me!', button);
 
     } //else if (command === 'add') {
 
-        //bot.channels.cache.get('841438933824569375').send("Dont delete me 2");
-        //bot.channels.cache.get('841438933824569375').send("Dont delete me 3");
-        //bot.channels.cache.get('841438933824569375').send("Dont delete me 4");
-        //bot.channels.cache.get('841438933824569375').send("Dont delete me 5");
+    //bot.channels.cache.get('841438933824569375').send("Dont delete me 2");
+    //bot.channels.cache.get('841438933824569375').send("Dont delete me 3");
+    //bot.channels.cache.get('841438933824569375').send("Dont delete me 4");
+    //bot.channels.cache.get('841438933824569375').send("Dont delete me 5");
 
     //}
 });

@@ -1,6 +1,6 @@
 {
   "name": "canukbot",
-  "version": "2.4.0",
+  "version": "3.0.0",
   "description": "CANUK scoreboard bot",
   "main": "main.js",
   "scripts": {
@@ -8,22 +8,21 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/brownsycamore/CANUK.git"
+    "url": "git+https://github.com/basementCoffee/ScoreboardBot"
   },
   "author": "brownsycamore/mongols",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/brownsycamore/CANUK/issues"
+    "url": "https://github.com/basementCoffee/ScoreboardBot/issues"
   },
-  "homepage": "https://github.com/brownsycamore/CANUK#readme",
+  "homepage": "https://github.com/basementCoffee/ScoreboardBot#readme",
   "dependencies": {
-    "cron": "^1.8.2",
-    "discord-buttons": "^3.1.1",
-    "discord.js": "^12.5.1",
-    "dotenv": "^9.0.2",
-    "google-auth-library": "^7.0.4",
+    "discord-buttons": "^4.0.0",
+    "discord-reply": "^0.1.2",
+    "discord.js": "^12.5.3",
+    "dotenv": "^10.0.0",
+    "google-auth-library": "^7.10.0",
     "google-spreadsheet": "^3.1.15",
-    "googleapis": "^67.0.0",
-    "spdl-core": "^1.5.1"
+    "googleapis": "^88.2.0"
   }
 }

@@ -2,5 +2,8 @@
 /shelf/
 /workspace.xml
 /.env
+/canuk-service-bot-keys.json
+/.key
+/.pub
 # Editor-based HTTP Client requests
 /httpRequests/
