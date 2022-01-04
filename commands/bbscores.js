@@ -77,7 +77,7 @@ module.exports = {
         try {
             bot.channels.cache.get('841438933824569375').messages.fetch('841560035926474753').then((x) => {
                 x.edit('Updating the BB Scoreboard...').then(() => {
-                    sheet1.loadCells('A1:AL595').then(() => {
+                    sheet1.loadCells('A1:AL500').then(() => {
                        x.edit('Battleship Scoreboard:');
                        //x.edit(getBBScoreboardEmbed());
                         let text = getBBScoreboardEmbed();
@@ -93,7 +93,7 @@ module.exports = {
             bot.channels.cache.get('852991463428063272').send('Oi some idiot deleted the original pinned leaderboard. Make sure you replace the fetch id with the new one in the code!');
             bot.channels.cache.get('841560035926474753').send.then((x) => {
                 x.edit('Updating scoreboard...').then(() => {
-                    sheet1.loadCells('A1:AL595').then(() => {
+                    sheet1.loadCells('A1:AL500').then(() => {
                         x.edit('Scoreboard:');
                         x.edit(getBBScoreboardEmbed());
                     })
