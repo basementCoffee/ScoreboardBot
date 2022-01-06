@@ -73,9 +73,9 @@ module.exports = {
             bbScoreBoardEmbed.setColor('#2b89bf');
             bbScoreBoardEmbed.setDescription(description);
             return bbScoreBoardEmbed;
-        }
+        }  //928438773447016478
         try {
-            bot.channels.cache.get('841438933824569375').messages.fetch('841560035926474753').then((x) => {
+            bot.channels.cache.get('841438933824569375').messages.fetch('928438773447016478').then((x) => {
                 x.edit('Updating the BB Scoreboard...').then(() => {
                     sheet1.loadCells('A1:AL500').then(() => {
                        x.edit('Battleship Scoreboard:');

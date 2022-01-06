@@ -63,7 +63,7 @@ module.exports = {
         }
 
         try {
-            bot.channels.cache.get('841438933824569375').messages.fetch('852989695095865375').then((x) => {
+            bot.channels.cache.get('841438933824569375').messages.fetch('928438781802070036').then((x) => {
                 x.edit('Updating the Universal Categories Scoreboard...').then(() => {
                     sheet5.loadCells('A1:E500').then(() => {
                         x.edit('Universal Categories Scoreboard:');

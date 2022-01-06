@@ -75,7 +75,7 @@ module.exports = {
         }
 
         try {
-            bot.channels.cache.get('841438933824569375').messages.fetch('852989691355725854').then((x) => {
+            bot.channels.cache.get('841438933824569375').messages.fetch('928438779126112256').then((x) => {
                 x.edit('Updating the DD Scoreboard...').then(() => {
                     sheet3.loadCells('A1:AO500').then(() => {
                         x.edit('DD Scoreboard:');

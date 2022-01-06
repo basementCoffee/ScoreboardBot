@@ -75,7 +75,7 @@ module.exports = {
         }
 
         try {
-            bot.channels.cache.get('841438933824569375').messages.fetch('852989694017929226').then((x) => {
+            bot.channels.cache.get('841438933824569375').messages.fetch('928438776760500244').then((x) => {
                 x.edit('Updating the CV Scoreboard...').then(() => {
                     sheet4.loadCells('A1:AL500').then(() => {
                         x.edit('CV Scoreboard:');
