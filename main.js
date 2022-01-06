@@ -156,7 +156,7 @@ bot.on('message', message => {
 
     } else if (command === 'version') {
 
-        message.channel.send("CANUK Bot is currently on V3.1.0");
+        message.channel.send("CANUK Bot is currently on V3.2.0");
 
     } else if (command === 'info') {
 
