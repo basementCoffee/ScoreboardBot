@@ -41,7 +41,7 @@ async function initializeAuth() {
         private_key: private_key,
     }, function (err) {
 
-        // Get all of the rows from the spreadsheet.
+        // Get all the rows from the spreadsheet.
         doc.getRows(1, function (err, rows) {
         });
     });
@@ -67,7 +67,7 @@ doc.useServiceAccountAuth({
     private_key: private_key,
 }, function (err) {
 
-    // Get all of the rows from the spreadsheet.
+    // Get all the rows from the spreadsheet.
     doc.getRows(1, function (err, rows) {
     });
 });
@@ -122,7 +122,7 @@ bot.on('message', message => {
 
     if (command === 'bb' || command === 'battleship') {
 
-        sheet1.loadCells('A1:AL595').then(() =>
+        sheet1.loadCells('A1:AL500').then(() =>
             bot.commands.get('battleship').execute(message, args, Discord, GoogleApis, GoogleSpreadsheet, doc, GoogleSpreadsheetWorksheet, sheet1, bot)
         );
 
@@ -156,7 +156,7 @@ bot.on('message', message => {
 
     } else if (command === 'version') {
 
-        message.channel.send("CANUK Bot is currently on V2.2.2");
+        message.channel.send("CANUK Bot is currently on V3.1.0");
 
     } else if (command === 'info') {
 
@@ -190,14 +190,15 @@ bot.on('message', message => {
 
         message.channel.send('Click me!', button);
 
-    } //else if (command === 'add') {
+    } else if (command === 'add') {
 
-    //bot.channels.cache.get('841438933824569375').send("Dont delete me 2");
-    //bot.channels.cache.get('841438933824569375').send("Dont delete me 3");
-    //bot.channels.cache.get('841438933824569375').send("Dont delete me 4");
-    //bot.channels.cache.get('841438933824569375').send("Dont delete me 5");
+    bot.channels.cache.get('841438933824569375').send("Dont delete me 1");
+    bot.channels.cache.get('841438933824569375').send("Dont delete me 2");
+    bot.channels.cache.get('841438933824569375').send("Dont delete me 3");
+    bot.channels.cache.get('841438933824569375').send("Dont delete me 4");
+    bot.channels.cache.get('841438933824569375').send("Dont delete me 5");
 
-    //}
+    }
 });
 
 
