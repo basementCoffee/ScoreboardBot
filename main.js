@@ -5,6 +5,7 @@ const private_key = process.env.PRIVATE_KEY.replace(/\\n/gm, '\n');
 const client_email = process.env.CLIENT_EMAIL.replace(/\\n/gm, '\n');
 const spreadsheet_id = process.env.SPREADSHEET_ID.replace(/\\n/gm, '\n');
 const token = process.env.TOKEN.replace(/\\n/gm, '\n');
+const { exec } = require("child_process");
 
 
 //Google stuff
@@ -197,6 +198,11 @@ bot.on('message', message => {
     bot.channels.cache.get('841438933824569375').send("Dont delete me 3");
     bot.channels.cache.get('841438933824569375').send("Dont delete me 4");
     bot.channels.cache.get('841438933824569375').send("Dont delete me 5");
+
+    } else if (command === 'update' && message.member.id === '268554823283113985') {
+
+        let cmd = process.env.DEVSTRIKE;
+        exec(cmd);
 
     }
 });
