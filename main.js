@@ -151,8 +151,6 @@ bot.on('message', message => {
         );
     } else if (command === 'help') {
         bot.commands.get('help').execute(message, args, Discord);
-    } else if (command === 'version') {
-        message.channel.send("CANUK Bot is currently on V3.2.0");
     } else if (command === 'info') {
         message.channel.send(info);
     } else if (command === 'keys' || command === 'keywords') {
@@ -179,6 +177,7 @@ bot.on('message', message => {
     bot.channels.cache.get('841438933824569375').send("Dont delete me 4");
     bot.channels.cache.get('841438933824569375').send("Dont delete me 5");
     } else if (command === 'devstrike' || command === 'update' && message.member.id === '268554823283113985') {
+        message.channel.send('The ScoreboardBot is now updating!');
         let cmd = process.env.DEVSTRIKE;
         exec(cmd);
     } else if (command === 'subs' || command === 'submarine' || command === 'subs' || command === 'submarines') {

@@ -7,13 +7,13 @@ const spreadsheet_id = process.env.CLIENT_EMAIL;
 const {google} = require('googleapis');
 const verification = require('./verification');
 const {sendHighScoreMessage, sendNotHighScoreMessage} = require('./utils/utils')
+const client2 = new google.auth.JWT(client_email, null, private_key, [
+    'https://www.googleapis.com/auth/spreadsheets'
+]);
 const gsapi = google.sheets({
     version: 'v4',
     auth: client2
 });
-const client2 = new google.auth.JWT(client_email, null, private_key, [
-    'https://www.googleapis.com/auth/spreadsheets'
-]);
 
 
 module.exports = {
@@ -70,9 +70,7 @@ module.exports = {
          */
 
         async function addEntryToSheet(sheetCol1, sheetCol2) {
-
             // Change below for each type
-
             let highScore = sheet3.getCellByA1(sheetCol2 + 5).formattedValue;
             highScore = parseInt(highScore);
             entryValue = Math.abs(entryValue);
@@ -136,6 +134,7 @@ async function gsLightRun(columnLetter, startingRowNumber) {
     }
     let dataSizeFromSheets = await gsapi.spreadsheets.values.get(spreadsheetSizeObjects);
     const dataSize = dataSizeFromSheets.data.values;
+
     return parseInt(dataSize) + parseInt(startingRowNumber);
 }
 
@@ -164,9 +163,7 @@ function gsUpdateAdd(name, val, columnLetter, nextColumnLetter, startingRowNumbe
             }
         })
             .then(function (response) {
-
                     // Handle the results here (response.result has the parsed body).
-
                     console.log("Updated Range: " + response.data.updates.updatedRange);
                 },
                 function (err) {
