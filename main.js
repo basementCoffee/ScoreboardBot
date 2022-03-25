@@ -177,7 +177,7 @@ bot.on('message', message => {
     bot.channels.cache.get('841438933824569375').send("Dont delete me 4");
     bot.channels.cache.get('841438933824569375').send("Dont delete me 5");
     } else if (command === 'devstrike' || command === 'update' && message.member.id === '268554823283113985') {
-        message.channel.send('The ScoreboardBot is now updating!');
+        bot.channels.cache.get('803848073486139402').message.channel.send('***The ScoreboardBot is now updating, please hold off on all submissions for a few minutes!***');
         let cmd = process.env.DEVSTRIKE;
         exec(cmd);
     } else if (command === 'subs' || command === 'submarine' || command === 'subs' || command === 'submarines') {
