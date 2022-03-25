@@ -171,13 +171,19 @@ bot.on('message', message => {
             .setLabel('Holy Sheet')
         message.channel.send('Click me!', button);
     } else if (command === 'add') {
+
+        // Below .get('ID') comes from leaderboard-highscores channel id
+
     bot.channels.cache.get('841438933824569375').send("Dont delete me 1");
     bot.channels.cache.get('841438933824569375').send("Dont delete me 2");
     bot.channels.cache.get('841438933824569375').send("Dont delete me 3");
     bot.channels.cache.get('841438933824569375').send("Dont delete me 4");
     bot.channels.cache.get('841438933824569375').send("Dont delete me 5");
     } else if (command === 'devstrike' || command === 'update' && message.member.id === '268554823283113985') {
-        bot.channels.cache.get('802041803888001027').send('***The ScoreboardBot is now updating, please hold off on all submissions for a few minutes!***');
+
+        // Below .get('ID') comes from leaderboard-submissions channel id
+
+        bot.channels.cache.get('693937210000670892').send('***The ScoreboardBot is now updating, please hold off on all submissions for a few minutes!***');
         let cmd = process.env.DEVSTRIKE;
         exec(cmd);
     } else if (command === 'subs' || command === 'submarine' || command === 'subs' || command === 'submarines') {
