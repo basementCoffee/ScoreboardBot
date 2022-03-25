@@ -16,12 +16,6 @@ module.exports = {
             )
             .setThumbnail('https://i.pinimg.com/originals/e7/d3/20/e7d320f068eedc680a536d9351dfebab.jpg')
             .setFooter(' Good luck Commanders!')
-
-
         message.channel.send(newEmbed);
-
-
     }
-
 }
-

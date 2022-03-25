@@ -1,22 +1,23 @@
 require('dotenv').config();
 
+
 const private_key = process.env.PRIVATE_KEY.replace(/\\n/gm, '\n');
 const client_email = process.env.CLIENT_EMAIL.replace(/\\n/gm, '\n');
 const spreadsheet_id = process.env.SPREADSHEET_ID.replace(/\\n/gm, '\n');
-
+const {MessageEmbed} = require("discord.js");
 const {
     google,
     GoogleApis
 } = require('googleapis');
-
 const {
     GoogleSpreadsheet,
     GoogleSpreadsheetWorksheet
 } = require('google-spreadsheet');
 
-// Initialize the sheet
-var doc = new GoogleSpreadsheet(spreadsheet_id);
 
+// Initialize the sheet
+
+var doc = new GoogleSpreadsheet(spreadsheet_id);
 var sheet1;
 var sheet2;
 var sheet3;
@@ -28,13 +29,12 @@ var sheet5;
     await initializeAuth();
 }());
 
+
 async function initializeAuth() {
     await doc.useServiceAccountAuth({
         client_email: client_email,
         private_key: private_key,
     });
-
-
     await doc.loadInfo(); // loads document properties and worksheets
     console.log(doc.title); // title of the sheet
     sheet1 = await doc.sheetsByIndex[0];
@@ -44,7 +44,7 @@ async function initializeAuth() {
     sheet5 = await doc.sheetsByIndex[4];
 }
 
-const {MessageEmbed} = require("discord.js");
+
 module.exports = {
     name: 'ddscores',
     description: "DD Scoreboard!",
@@ -73,7 +73,6 @@ module.exports = {
             ddScoreBoardEmbed.setDescription(description);
             return ddScoreBoardEmbed;
         }
-
         try {
             bot.channels.cache.get('841438933824569375').messages.fetch('928438779126112256').then((x) => {
                 x.edit('Updating the DD Scoreboard...').then(() => {
@@ -84,7 +83,6 @@ module.exports = {
                 })
             })
         }
-
         catch (e) {
             console.log('Cannot find the the scoreboard embed.');
             bot.channels.cache.get('852991463428063272').send('Oi some idiot deleted the original pinned leaderboard. Make sure you replace the fetch id with the new one in the code!');
@@ -104,12 +102,14 @@ module.exports = {
 abbreviateNumber = function (num) {
     num = parseInt(num);
     let fixed = 0; // number of decimal places to show
+
     if (num === null) {
         return null;
     } // terminate early
     if (num === 0) {
         return '0';
     } // terminate early
+
     fixed = (!fixed || fixed < 0) ? 0 : fixed;
     var b = (num).toPrecision(2).split("e"), // get power
         k = b.length === 1 ? 0 : Math.floor(Math.min(b[1].slice(1), 14) / 3), // floor at decimals, ceiling at trillions
@@ -118,4 +118,3 @@ abbreviateNumber = function (num) {
         e = d + ['', 'k', 'm', 'b', 't'][k]; // append power
     return e;
 }
-

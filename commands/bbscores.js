@@ -1,24 +1,23 @@
 require('dotenv').config();
 
+
 const private_key = process.env.PRIVATE_KEY.replace(/\\n/gm, '\n');
 const client_email = process.env.CLIENT_EMAIL.replace(/\\n/gm, '\n');
 const spreadsheet_id = process.env.SPREADSHEET_ID.replace(/\\n/gm, '\n');
-
-
-
+const {MessageEmbed} = require("discord.js");
 const {
     google,
     GoogleApis
 } = require('googleapis');
-
 const {
     GoogleSpreadsheet,
     GoogleSpreadsheetWorksheet
 } = require('google-spreadsheet');
 
-// Initialize the sheet
-var doc = new GoogleSpreadsheet(spreadsheet_id);
 
+// Initialize the sheet
+
+var doc = new GoogleSpreadsheet(spreadsheet_id);
 var sheet1;
 var sheet2;
 var sheet3;
@@ -30,13 +29,12 @@ var sheet5;
     await initializeAuth();
 }());
 
+
 async function initializeAuth() {
     await doc.useServiceAccountAuth({
         client_email: client_email,
         private_key: private_key,
     });
-
-
     await doc.loadInfo(); // loads document properties and worksheets
     console.log(doc.title); // title of the sheet
     sheet1 = await doc.sheetsByIndex[0];
@@ -46,7 +44,7 @@ async function initializeAuth() {
     sheet5 = await doc.sheetsByIndex[4];
 }
 
-const {MessageEmbed} = require("discord.js");
+
 module.exports = {
     name: 'bbscores',
     description: "BB Scoreboard!",
@@ -73,21 +71,18 @@ module.exports = {
             bbScoreBoardEmbed.setColor('#2b89bf');
             bbScoreBoardEmbed.setDescription(description);
             return bbScoreBoardEmbed;
-        }  //928438773447016478
+        }
         try {
             bot.channels.cache.get('841438933824569375').messages.fetch('928438773447016478').then((x) => {
                 x.edit('Updating the BB Scoreboard...').then(() => {
                     sheet1.loadCells('A1:AL500').then(() => {
-                       x.edit('Battleship Scoreboard:');
-                       //x.edit(getBBScoreboardEmbed());
+                        x.edit('Battleship Scoreboard:');
                         let text = getBBScoreboardEmbed();
                         x.edit(text);
                     })
                 })
             })
         }
-
-        //841560035926474753 <-from discord directly
         catch (e) {
             console.log('Cannot find the the scoreboard embed.');
             bot.channels.cache.get('852991463428063272').send('Oi some idiot deleted the original pinned leaderboard. Make sure you replace the fetch id with the new one in the code!');
@@ -121,4 +116,3 @@ abbreviateNumber = function (num) {
         e = d + ['', 'k', 'm', 'b', 't'][k]; // append power
     return e;
 }
-
