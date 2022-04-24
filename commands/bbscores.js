@@ -16,13 +16,8 @@ const {
 
 
 // Initialize the sheet
-
 var doc = new GoogleSpreadsheet(spreadsheet_id);
-var sheet1;
-var sheet2;
-var sheet3;
-var sheet4;
-var sheet5;
+var sheet0;
 
 
 (async function () {
@@ -37,11 +32,7 @@ async function initializeAuth() {
     });
     await doc.loadInfo(); // loads document properties and worksheets
     console.log(doc.title); // title of the sheet
-    sheet1 = await doc.sheetsByIndex[0];
-    sheet2 = await doc.sheetsByIndex[1];
-    sheet3 = await doc.sheetsByIndex[2];
-    sheet4 = await doc.sheetsByIndex[3];
-    sheet5 = await doc.sheetsByIndex[4];
+    sheet0 = await doc.sheetsByIndex[6];
 }
 
 
@@ -53,19 +44,25 @@ module.exports = {
             const bbScoreBoardEmbed = new MessageEmbed();
             const description =
                 '-------------  **BATTLESHIP** -------------\n' +
-                '\`DAMAGE:\`' + sheet1.getCellByA1('B6').formattedValue + ' (' + abbreviateNumber(sheet1.getCellByA1('B5').formattedValue) + ') \n' +
-                '\`KILLS:\`' + sheet1.getCellByA1('E6').formattedValue + ' (' + abbreviateNumber(sheet1.getCellByA1('E5').formattedValue) + ') \n' +
-                '\`BXP:\`' + sheet1.getCellByA1('H6').formattedValue + ' (' + sheet1.getCellByA1('H5').formattedValue + ') \n' +
-                '\`SECONDARY HITS:\`' + sheet1.getCellByA1('K6').formattedValue + ' (' + abbreviateNumber(sheet1.getCellByA1('K5').formattedValue) + ') \n' +
-                '\`CITADELS:\`' + sheet1.getCellByA1('N6').formattedValue + ' (' + abbreviateNumber(sheet1.getCellByA1('N5').formattedValue) + ') \n' +
-                '\`MBH:\`' + sheet1.getCellByA1('Q6').formattedValue + ' (' + abbreviateNumber(sheet1.getCellByA1('Q5').formattedValue) + ') \n' +
-                '\`TANKED DAMAGE:\`' + sheet1.getCellByA1('T6').formattedValue + ' (' + abbreviateNumber(sheet1.getCellByA1('T5').formattedValue) + ') \n' +
-                '\`AIRPLANE KILLS:\`' + sheet1.getCellByA1('W6').formattedValue + ' (' + abbreviateNumber(sheet1.getCellByA1('W5').formattedValue) + ') \n' +
-                '\`FIRES:\`' + sheet1.getCellByA1('Z6').formattedValue + ' (' + abbreviateNumber(sheet1.getCellByA1('Z5').formattedValue) + ') \n' +
-                '\`CAPS/DEFENDED/ASSIST:\`' + sheet1.getCellByA1('AC6').formattedValue + ' (' + abbreviateNumber(sheet1.getCellByA1('AC5').formattedValue) + ') \n' +
-                '\`INCAPACITATIONS:\`' + sheet1.getCellByA1('AF6').formattedValue + ' (' + abbreviateNumber(sheet1.getCellByA1('AF5').formattedValue) + ') \n' +
-                '\`BASE-XP (≤T7):\`' + sheet1.getCellByA1('AI6').formattedValue + ' (' + sheet1.getCellByA1('AI5').formattedValue + ') \n' +
-                '\`DAMAGE (≤T7):\`' + sheet1.getCellByA1('AL6').formattedValue + ' (' + abbreviateNumber(sheet1.getCellByA1('AL5').formattedValue) + ') \n'
+                '\`DAMAGE:\`' + sheet0.getCellByA1('AU6').formattedValue + ' (' + abbreviateNumber(sheet0.getCellByA1('AU5').formattedValue) + ') \n' +
+                '\`BXP:\`' + sheet0.getCellByA1('AX6').formattedValue + ' (' + sheet0.getCellByA1('AX5').formattedValue + ') \n' +
+                '\`KILLS:\`' + sheet0.getCellByA1('B6').formattedValue + ' (' + abbreviateNumber(sheet0.getCellByA1('B5').formattedValue) + ') \n' +
+                '\`MBH:\`' + sheet0.getCellByA1('E6').formattedValue + ' (' + abbreviateNumber(sheet0.getCellByA1('E5').formattedValue) + ') \n' +
+                '\`CITADELS:\`' + sheet0.getCellByA1('H6').formattedValue + ' (' + abbreviateNumber(sheet0.getCellByA1('H5').formattedValue) + ') \n' +
+                '\`INCAPACITATIONS:\`' + sheet0.getCellByA1('K6').formattedValue + ' (' + abbreviateNumber(sheet0.getCellByA1('K5').formattedValue) + ') \n' +
+                '\`FIRES:\`' + sheet0.getCellByA1('N6').formattedValue + ' (' + abbreviateNumber(sheet0.getCellByA1('N5').formattedValue) + ') \n' +
+                '\`SECONDARY HITS:\`' + sheet0.getCellByA1('Q6').formattedValue + ' (' + abbreviateNumber(sheet0.getCellByA1('Q5').formattedValue) + ') \n' +
+                '\`AIRPLANE KILLS:\`' + sheet0.getCellByA1('T6').formattedValue + ' (' + abbreviateNumber(sheet0.getCellByA1('T5').formattedValue) + ') \n' +
+                '\`TORPS:\`' + sheet0.getCellByA1('W6').formattedValue + ' (' + abbreviateNumber(sheet0.getCellByA1('W5').formattedValue) + ') \n' +
+                '\`FLOODS:\`' + sheet0.getCellByA1('Z6').formattedValue + ' (' + abbreviateNumber(sheet0.getCellByA1('Z5').formattedValue) + ') \n' +
+                '\`SUB HITS:\`' + sheet0.getCellByA1('AC6').formattedValue + ' (' + abbreviateNumber(sheet0.getCellByA1('AC5').formattedValue) + ') \n' +
+                '\`AIRSTRIKE:\`' + sheet0.getCellByA1('AF6').formattedValue + ' (' + abbreviateNumber(sheet0.getCellByA1('AF5').formattedValue) + ') \n' +
+                '\`SPOTS:\`' + sheet0.getCellByA1('AI6').formattedValue + ' (' + abbreviateNumber(sheet0.getCellByA1('AI5').formattedValue) + ') \n' +
+                '\`CAPS/DEFENDED/ASSIST:\`' + sheet0.getCellByA1('AL6').formattedValue + ' (' + abbreviateNumber(sheet0.getCellByA1('AL5').formattedValue) + ') \n' +
+                '\`BASE-XP (≤T7):\`' + sheet0.getCellByA1('AO6').formattedValue + ' (' + sheet0.getCellByA1('AO5').formattedValue + ') \n' +
+                '\`DAMAGE (≤T7):\`' + sheet0.getCellByA1('AR6').formattedValue + ' (' + abbreviateNumber(sheet0.getCellByA1('AR5').formattedValue) + ') \n' +
+                '\`TANKED DAMAGE:\`' + sheet0.getCellByA1('BA6').formattedValue + ' (' + abbreviateNumber(sheet0.getCellByA1('BA5').formattedValue) + ') \n' +
+                '\`SPOTTING DAMAGE:\`' + sheet0.getCellByA1('BD6').formattedValue + ' (' + abbreviateNumber(sheet0.getCellByA1('BD5').formattedValue) + ') \n'
             ;
             bbScoreBoardEmbed.setTitle('[CANUK] BB LEADERBOARD');
             bbScoreBoardEmbed.setColor('#2b89bf');
@@ -73,9 +70,9 @@ module.exports = {
             return bbScoreBoardEmbed;
         }
         try {
-            bot.channels.cache.get('841438933824569375').messages.fetch('928438773447016478').then((x) => {
+            bot.channels.cache.get('895160324607586315').messages.fetch('967697234013601812').then((x) => {
                 x.edit('Updating the BB Scoreboard...').then(() => {
-                    sheet1.loadCells('A1:AL500').then(() => {
+                    sheet0.loadCells('A1:BD500').then(() => {
                         x.edit('Battleship Scoreboard:');
                         let text = getBBScoreboardEmbed();
                         x.edit(text);
@@ -88,7 +85,7 @@ module.exports = {
             bot.channels.cache.get('852991463428063272').send('Oi some idiot deleted the original pinned leaderboard. Make sure you replace the fetch id with the new one in the code!');
             bot.channels.cache.get('841560035926474753').send.then((x) => {
                 x.edit('Updating scoreboard...').then(() => {
-                    sheet1.loadCells('A1:AL500').then(() => {
+                    sheet0.loadCells('A1:BD500').then(() => {
                         x.edit('Scoreboard:');
                         x.edit(getBBScoreboardEmbed());
                     })

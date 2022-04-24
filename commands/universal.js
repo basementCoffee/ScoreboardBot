@@ -18,7 +18,7 @@ const gsapi = google.sheets({
 module.exports = {
   name: 'universal',
   description: "universal commands",
-  execute(message, args, Discord, GoogleApis, GoogleSpreadsheet, doc, GoogleSpreadsheetWorksheet, sheet5, bot) {
+  execute(message, args, Discord, GoogleApis, GoogleSpreadsheet, doc, GoogleSpreadsheetWorksheet, sheet5, bot, whichBoard) {
     let type = args[0];
     let entryValue;
     let commanderName = (message.member.nickname ? message.member.nickname : message.member.user.username);
@@ -56,23 +56,25 @@ module.exports = {
         gsUpdateAdd(commanderName, entryValue, sheetCol1, sheetCol2, 10);
       } else if (highScore < entryValue) {
         message.channel.send('Well done ' + commanderName + '! Your entry is the new high score by a margin of ' + Math.abs(valueDifferenceNewHS) + '!\nThis high score has been forwarded to a commander for verification.');
+        whichBoard = 5;
         verification.execute(message, args, Discord, bot, {
           commanderName,
           val: entryValue,
           sheetCol1,
           sheetCol2,
           startingRowNumber: 10,
-          sheetName: 'Universal'
+          sheetName: 'NEWUNIVERSAL'
         });
       } else if (highScore === entryValue) {
         message.channel.send("It's a tie!");
+        whichBoard = 5;
         verification.execute(message, args, Discord, bot, {
           commanderName,
           val: entryValue,
           sheetCol1,
           sheetCol2,
           startingRowNumber: 10,
-          sheetName: 'DD'
+          sheetName: 'NEWUNIVERSAL'
         });
       }
     }
@@ -96,7 +98,7 @@ module.exports = {
           sheetCol1,
           sheetCol2,
           startingRowNumber: 10,
-          sheetName: 'Universal'
+          sheetName: 'NEWUNIVERSAL'
         });
       }else if (highScore === entryValue) {
         message.channel.send("It's a tie!");
@@ -106,7 +108,7 @@ module.exports = {
           sheetCol1,
           sheetCol2,
           startingRowNumber: 10,
-          sheetName: 'Universal'
+          sheetName: 'NEWUNIVERSAL'
         });
       }
     }
@@ -121,13 +123,13 @@ async function gsrun(cl) {
   });
   const spreadsheetSizeObjects = {
     spreadsheetId: spreadsheet_id,
-    range: 'Universal!B5'
+    range: 'NEWUNIVERSAL!B5'
   }
   let dataSizeFromSheets = await gsapi.spreadsheets.values.get(spreadsheetSizeObjects);
   const dataSize = dataSizeFromSheets.data.values;
   const songObjects = {
     spreadsheetId: spreadsheet_id,
-    range: "Universal!A5:B5" + dataSize.toString()
+    range: "NEWUNIVERSAL!A5:B5" + dataSize.toString()
   };
   let dataSO = await gsapi.spreadsheets.values.get(songObjects);
   const arrayOfSpreadsheetValues = dataSO.data.values;
@@ -137,7 +139,7 @@ async function gsrun(cl) {
 async function gsLightRun(columnLetter, startingRowNumber) {
   const spreadsheetSizeObjects = {
     spreadsheetId: spreadsheet_id,
-    range: 'Universal!' + columnLetter.toString() + 4
+    range: 'NEWUNIVERSAL!' + columnLetter.toString() + 4
   }
   let dataSizeFromSheets = await gsapi.spreadsheets.values.get(spreadsheetSizeObjects);
   const dataSize = dataSizeFromSheets.data.values;

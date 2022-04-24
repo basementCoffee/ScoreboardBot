@@ -10,7 +10,7 @@ const {google} = require('googleapis');
 module.exports = {
     name: 'verification',
     description: "Verification ticket!",
-    execute(message, args, Discord, bot, data) {
+    execute(message, args, Discord, bot, data, whichBoard) {
         const newEmbed = new Discord.MessageEmbed()
             .setColor('#76ee00')
             .setTitle('Click the below link to view entry and screenshots for verification')
@@ -41,11 +41,32 @@ module.exports = {
                     console.log(data.sheetName);
                     await gsUpdateAdd(data.commanderName, data.val, data.sheetCol1, data.sheetCol2, data.startingRowNumber, data.sheetName);
                     await new Promise(res => setTimeout(res, 1000));
-                    bot.commands.get('bbscores').execute(message, args, bot);
-                    bot.commands.get('ddscores').execute(message, args, bot);
-                    bot.commands.get('cruiserscores').execute(message, args, bot);
-                    bot.commands.get('cvscores').execute(message, args, bot);
-                    bot.commands.get('universalscores').execute(message, args, bot);
+                    if (whichBoard === 0) {
+                        bot.commands.get('bbscores').execute(message, args, bot);
+                        console.log(whichBoard);
+                        whichBoard = 7;
+                    } else if (whichBoard === 1) {
+                        bot.commands.get('cruiserscores').execute(message, args, bot);
+                        console.log(whichBoard);
+                        whichboard = 7;
+                    } else if (whichBoard === 2) {
+                        bot.commands.get('ddscores').execute(message, args, bot);
+                        console.log(whichBoard);
+                        whichboard = 7;
+                    } else if (whichBoard === 3) {
+                        bot.commands.get('cvscores').execute(message, args, bot);
+                        console.log(whichBoard);
+                        whichboard = 7;
+                    } else if (whichBoard === 5) {
+                        bot.commands.get('universalscores').execute(message, args, bot);
+                        console.log(whichBoard);
+                        whichboard = 7;
+                    }
+                    // bot.commands.get('bbscores').execute(message, args, bot);
+                    // bot.commands.get('ddscores').execute(message, args, bot);
+                    // bot.commands.get('cruiserscores').execute(message, args, bot);
+                    // bot.commands.get('cvscores').execute(message, args, bot);
+                    // bot.commands.get('universalscores').execute(message, args, bot);
                     message.react('👍').then();
                     let reply = 'Added to sheet. #leaderboard-scores is updated.';
                     try {

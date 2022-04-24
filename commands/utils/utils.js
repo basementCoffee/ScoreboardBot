@@ -1,4 +1,4 @@
-let listOfWords = ["Wow", "Superb job", "Awesome job", "Good job", "Great job", "Well done", "Well done"];
+let listOfWords = ["Wow", "Superb job", "Awesome job", "Good job", "Great job", "Well done"];
 
 /**
  * Send a message regarding their high score.

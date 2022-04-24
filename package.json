@@ -1,7 +1,7 @@
 {
   "name": "canukbot",
-  "version": "3.4.0",
-  "description": "CANUK scoreboard bot",
+  "version": "4.0.0",
+  "description": "[CANUK] ScoreboardBot",
   "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

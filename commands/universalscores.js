@@ -17,10 +17,6 @@ const {
 // Initialize the sheet
 
 var doc = new GoogleSpreadsheet(spreadsheet_id);
-var sheet1;
-var sheet2;
-var sheet3;
-var sheet4;
 var sheet5;
 
 
@@ -36,11 +32,7 @@ async function initializeAuth() {
     });
     await doc.loadInfo(); // loads document properties and worksheets
     console.log(doc.title); // title of the sheet
-    sheet1 = await doc.sheetsByIndex[0];
-    sheet2 = await doc.sheetsByIndex[1];
-    sheet3 = await doc.sheetsByIndex[2];
-    sheet4 = await doc.sheetsByIndex[3];
-    sheet5 = await doc.sheetsByIndex[4];
+    sheet5 = await doc.sheetsByIndex[11];
 }
 
 
@@ -61,7 +53,7 @@ module.exports = {
             return universalScoreBoardEmbed;
         }
         try {
-            bot.channels.cache.get('841438933824569375').messages.fetch('928438781802070036').then((x) => {
+            bot.channels.cache.get('895160324607586315').messages.fetch('967697236014276658').then((x) => {
                 x.edit('Updating the Universal Categories Scoreboard...').then(() => {
                     sheet5.loadCells('A1:E500').then(() => {
                         x.edit('Universal Categories Scoreboard:');

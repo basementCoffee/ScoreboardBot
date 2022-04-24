@@ -19,44 +19,56 @@ const gsapi = google.sheets({
 module.exports = {
   name: 'carrier',
   description: "carrier commands",
-  execute(message, args, Discord, GoogleApis, GoogleSpreadsheet, doc, GoogleSpreadsheetWorksheet, sheet4, bot) {
+  execute(message, args, Discord, GoogleApis, GoogleSpreadsheet, doc, GoogleSpreadsheetWorksheet, sheet3, bot, whichBoard) {
     let type = args[0];
     let entryValue;
     let commanderName = (message.member.nickname ? message.member.nickname : message.member.user.username);
-    let allowedWords = ['damage', 'dmg', 'kill', 'kills', 'bxp', 'base-xp', 'cit', 'cits',
-      'citadel', 'fires', 'fire', 'floods', 'torps', 'planes', 'incaps', 'incap', 'N/A', 'target-hits', 'targets',
-      't7bxp', 't7dmg'];
+    let allowedWords = ['kills', 'mbh', 'cits', 'incaps', 'fires', 'secondaries', 'planekills', 'torps', 'floods', 'subhits', 'airstrike', 'spots', 'caps', 't7bxp', 't7dmg', 'dmg', 'bxp', 'tanked', 'spottingdmg'];
     if (allowedWords.includes(args[0])) {
       let val = parseInt(args[1]);
       if (val > 0) entryValue = args[1];
-      else return message.channel.send("Sorry I don't recognize that command. Please check the pinned help guide on how to use the CANUKBot.");
+      //else return message.channel.send("Sorry I don't recognize that command. Please check the pinned help guide on how to use the CANUKBot.");
     } else {
       return message.channel.send("Sorry I don't recognize that command. Please check the pinned help guide on how to use the CANUKBot.");
     }
-    if (type === 'damage' || type === 'dmg') {
+    if (type === 'kills') {
       addEntryToSheet('A', 'B');
-    } else if (type === 'kills' || type === 'kill') {
+    } else if (type === 'mbh') {
       addEntryToSheet('D', 'E');
-    } else if (type === 'base-xp' || type === 'bxp') {
+    } else if (type === 'cits') {
       addEntryToSheet('G', 'H');
-    } else if (type === 'citadel' || type === 'cits' || type === 'cit') {
+    } else if (type === 'incaps') {
       addEntryToSheet('J', 'K');
-    } else if (type === 'fires' || type === 'fire') {
+    } else if (type === 'fires') {
       addEntryToSheet('M', 'N');
-    } else if (type === 'floods') {
+    } else if (type === 'secondaries') {
       addEntryToSheet('P', 'Q');
-    } else if (type === 'torps') {
+    } else if (type === 'planekills') {
       addEntryToSheet('S', 'T');
-    } else if (type === 'planes') {
+    } else if (type === 'torps') {
       addEntryToSheet('V', 'W');
-    } else if (type === 'incaps' || type === 'incap') {
+    } else if (type === 'floods') {
       addEntryToSheet('Y', 'Z');
-    } else if (type === 'target-hits' || type === 'targets') {
+    } else if (type === 'subhits') {
+      addEntryToSheet('AB', 'AC');
+    } else if (type === 'airstrike') {
       addEntryToSheet('AE', 'AF');
-    } else if (type === 't7bxp') {
+    } else if (type === 'spots') {
       addEntryToSheet('AH', 'AI');
-    } else if (type === 't7dmg') {
+    } else if (type === 'caps') {
       addEntryToSheet('AK', 'AL');
+    } else if (type === 't7bxp') {
+      addEntryToSheet('AN', 'AO');
+    } else if (type === 't7dmg') {
+      addEntryToSheet('AQ', 'AR');
+    } else if (type === 'dmg') {
+      addEntryToSheet('AT', 'AU');
+    } else if (type === 'bxp') {
+      addEntryToSheet('AW', 'AX');
+    } else if (type === 'tanked') {
+      addEntryToSheet('AZ', 'BA');
+    } else if (type === 'spottingdmg') {
+      addEntryToSheet('BC', 'BD');
     }
 
     /**
@@ -69,7 +81,7 @@ module.exports = {
 
       // Change below for each type
 
-      let highScore = sheet4.getCellByA1(sheetCol2 + 5).formattedValue;
+      let highScore = sheet3.getCellByA1(sheetCol2 + 5).formattedValue;
       highScore = parseInt(highScore);
       entryValue = Math.abs(entryValue);
       let valueDifferenceHS = highScore - entryValue;
@@ -84,24 +96,26 @@ module.exports = {
 
       else if (highScore < entryValue) {
         let prevMessage = await sendHighScoreMessage(message, commanderName, valueDifferenceNewHS);
+        whichBoard = 3;
         verification.execute(message, args, Discord, bot, {
           commanderName,
           val: entryValue,
           sheetCol1,
           sheetCol2,
           startingRowNumber: 10,
-          sheetName: 'CV',
+          sheetName: 'NEWCV',
           prevMessage
         });
       } else if (highScore === entryValue) {
         message.channel.send("It's a tie!");
+        whichBoard = 3;
         verification.execute(message, args, Discord, bot, {
           commanderName,
           val: entryValue,
           sheetCol1,
           sheetCol2,
           startingRowNumber: 10,
-          sheetName: 'CV'
+          sheetName: 'NEWCV'
         });
       }
     }
@@ -116,13 +130,13 @@ async function gsrun(cl) {
   });
   const spreadsheetSizeObjects = {
     spreadsheetId: spreadsheet_id,
-    range: 'CV!B5'
+    range: 'NEWCV!B5'
   }
   let dataSizeFromSheets = await gsapi.spreadsheets.values.get(spreadsheetSizeObjects);
   const dataSize = dataSizeFromSheets.data.values;
   const songObjects = {
     spreadsheetId: spreadsheet_id,
-    range: "CV!A5:B5" + dataSize.toString()
+    range: "NEWCV!A5:B5" + dataSize.toString()
   };
   let dataSO = await gsapi.spreadsheets.values.get(songObjects);
   const arrayOfSpreadsheetValues = dataSO.data.values;
@@ -132,7 +146,7 @@ async function gsrun(cl) {
 async function gsLightRun(columnLetter, startingRowNumber) {
   const spreadsheetSizeObjects = {
     spreadsheetId: spreadsheet_id,
-    range: 'CV!' + columnLetter.toString() + 4
+    range: 'NEWCV!' + columnLetter.toString() + 4
   }
   let dataSizeFromSheets = await gsapi.spreadsheets.values.get(spreadsheetSizeObjects);
   const dataSize = dataSizeFromSheets.data.values;

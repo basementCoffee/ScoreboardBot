@@ -19,46 +19,57 @@ const gsapi = google.sheets({
 module.exports = {
     name: 'battleship',
     description: "battleship commands",
-    execute(message, args, Discord, GoogleApis, GoogleSpreadsheet, doc, GoogleSpreadsheetWorksheet, sheet1, bot) {
+    execute(message, args, Discord, GoogleApis, GoogleSpreadsheet, doc, GoogleSpreadsheetWorksheet, sheet0, bot, whichBoard) {
         let type = args[0];
         let entryValue;
         let commanderName = (message.member.nickname ? message.member.nickname : message.member.user.username);
-        let allowedWords = ['damage', 'dmg', 'kill', 'kills', 'bxp', 'base-xp', 'secondaries', 'secondary', 'cits', 'cit',
-            'citadel', 'mbh', 'tanked', 'planes', 'fires', 'fire', 'caps', 'cap', 'defended', 'assist', 'incaps', 'incap',
-            't7bxp', 't7dmg', 't7damage'];
+        let allowedWords = ['kills', 'mbh', 'cits', 'incaps', 'fires', 'secondaries', 'planekills', 'torps', 'floods', 'subhits', 'airstrike', 'spots', 'caps', 't7bxp', 't7dmg', 'dmg', 'bxp', 'tanked', 'spottingdmg'];
         if (allowedWords.includes(args[0])) {
             let val = parseInt(args[1]);
             if (val > 0) entryValue = args[1];
-            else return message.channel.send("Sorry I don't recognize that command. Please check the pinned help guide on how to use the CANUKBot.");
-        } else {
+            //else return message.channel.send("Sorry I don't recognize that command. Please check the pinned help guide on how to use the CANUKBot.");
+        }
+        else {
             return message.channel.send("Sorry I don't recognize that command. Please check the pinned help guide on how to use the CANUKBot.");
         }
-        if (type === 'damage' || type === 'dmg') {
+        if (type === 'kills') {
             addEntryToSheet('A', 'B');
-        } else if (type === 'kills' || type === 'kill') {
-            addEntryToSheet('D', 'E');
-        } else if (type === 'base-xp' || type === 'bxp') {
-            addEntryToSheet('G', 'H');
-        } else if (type === 'secondaries' || type === 'secondary') {
-            addEntryToSheet('J', 'K');
-        } else if (type === 'citadel' || type === 'cits' || type === 'cit') {
-            addEntryToSheet('M', 'N');
         } else if (type === 'mbh') {
+            addEntryToSheet('D', 'E');
+        } else if (type === 'cits') {
+            addEntryToSheet('G', 'H');
+        } else if (type === 'incaps') {
+            addEntryToSheet('J', 'K');
+        } else if (type === 'fires') {
+            addEntryToSheet('M', 'N');
+        } else if (type === 'secondaries') {
             addEntryToSheet('P', 'Q');
-        } else if (type === 'tanked') {
+        } else if (type === 'planekills') {
             addEntryToSheet('S', 'T');
-        } else if (type === 'planes') {
+        } else if (type === 'torps') {
             addEntryToSheet('V', 'W');
-        } else if (type === 'fires' || type === 'fire') {
+        } else if (type === 'floods') {
             addEntryToSheet('Y', 'Z');
-        } else if (type === 'caps' || type === 'cap' || type === 'defended' || type === 'assist') {
+        } else if (type === 'subhits') {
             addEntryToSheet('AB', 'AC');
-        } else if (type === 'incaps' || type === 'incap') {
+        } else if (type === 'airstrike') {
             addEntryToSheet('AE', 'AF');
-        } else if (type === 't7bxp') {
+        } else if (type === 'spots') {
             addEntryToSheet('AH', 'AI');
-        } else if (type === 't7dmg' || type === 't7damage') {
+        } else if (type === 'caps') {
             addEntryToSheet('AK', 'AL');
+        } else if (type === 't7bxp') {
+            addEntryToSheet('AN', 'AO');
+        } else if (type === 't7dmg') {
+            addEntryToSheet('AQ', 'AR');
+        } else if (type === 'dmg') {
+            addEntryToSheet('AT', 'AU');
+        } else if (type === 'bxp') {
+            addEntryToSheet('AW', 'AX');
+        } else if (type === 'tanked') {
+            addEntryToSheet('AZ', 'BA');
+        } else if (type === 'spottingdmg') {
+            addEntryToSheet('BC', 'BD');
         }
 
         /**
@@ -70,8 +81,7 @@ module.exports = {
         async function addEntryToSheet(sheetCol1, sheetCol2) {
 
             // Change below for each type
-
-            let highScore = sheet1.getCellByA1(sheetCol2 + 5).formattedValue;
+            let highScore = sheet0.getCellByA1(sheetCol2 + 5).formattedValue;
             highScore = parseInt(highScore);
             entryValue = Math.abs(entryValue);
             let valueDifferenceHS = highScore - entryValue;
@@ -81,28 +91,32 @@ module.exports = {
                 gsUpdateAdd(commanderName, entryValue, sheetCol1, sheetCol2, 10);
             } else if (highScore < entryValue) {
                 let prevMessage = await sendHighScoreMessage(message, commanderName, valueDifferenceNewHS);
+                // Passes on to verification which board to update
+                whichBoard = 0;
                 verification.execute(message, args, Discord, bot, {
                     commanderName,
                     val: entryValue,
                     sheetCol1,
                     sheetCol2,
                     startingRowNumber: 10,
-                    sheetName: 'BB',
+                    sheetName: 'NEWBB',
                     prevMessage
                 });
             } else if (highScore === entryValue) {
                 message.channel.send("It's a tie!");
+                whichBoard = 0;
                 verification.execute(message, args, Discord, bot, {
                     commanderName,
                     val: entryValue,
                     sheetCol1,
                     sheetCol2,
                     startingRowNumber: 10,
-                    sheetName: 'BB'
+                    sheetName: 'NEWBB'
                 });
             }
         }
     }
+    // add scoreboard update call here from verification
 }
 
 
@@ -113,13 +127,13 @@ async function gsrun(cl) {
     });
     const spreadsheetSizeObjects = {
         spreadsheetId: spreadsheet_id,
-        range: 'BB!B5'
+        range: 'NEWBB!B5'
     }
     let dataSizeFromSheets = await gsapi.spreadsheets.values.get(spreadsheetSizeObjects);
     const dataSize = dataSizeFromSheets.data.values;
     const songObjects = {
         spreadsheetId: spreadsheet_id,
-        range: "BB!A5:B5" + dataSize.toString()
+        range: "NEWBB!A5:B5" + dataSize.toString()
     };
     let dataSO = await gsapi.spreadsheets.values.get(songObjects);
     const arrayOfSpreadsheetValues = dataSO.data.values;
@@ -129,7 +143,7 @@ async function gsrun(cl) {
 async function gsLightRun(columnLetter, startingRowNumber) {
     const spreadsheetSizeObjects = {
         spreadsheetId: spreadsheet_id,
-        range: 'BB!' + columnLetter.toString() + 4
+        range: 'NEWBB!' + columnLetter.toString() + 4
     }
     let dataSizeFromSheets = await gsapi.spreadsheets.values.get(spreadsheetSizeObjects);
     const dataSize = dataSizeFromSheets.data.values;
@@ -163,7 +177,6 @@ function gsUpdateAdd(name, val, columnLetter, nextColumnLetter, startingRowNumbe
             .then(function (response) {
 
                     // Handle the results here (response.result has the parsed body).
-
                     console.log("Updated Range: " + response.data.updates.updatedRange);
                 },
                 function (err) {
