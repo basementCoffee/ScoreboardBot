@@ -1,11 +1,12 @@
 require('dotenv').config();
 
-
 const private_key = process.env.PRIVATE_KEY.replace(/\\n/gm, '\n');
 const client_email = process.env.CLIENT_EMAIL.replace(/\\n/gm, '\n');
 const spreadsheet_id = process.env.SPREADSHEET_ID.replace(/\\n/gm, '\n');
-const {google} = require('googleapis');
+const {google, GoogleApis} = require('googleapis');
 const verification = require('./verification');
+const Discord = require("discord.js");
+const {GoogleSpreadsheet, GoogleSpreadsheetWorksheet} = require("google-spreadsheet");
 const client2 = new google.auth.JWT(client_email, null, private_key, [
   'https://www.googleapis.com/auth/spreadsheets'
 ]);
@@ -18,11 +19,11 @@ const gsapi = google.sheets({
 module.exports = {
   name: 'universal',
   description: "universal commands",
-  execute(message, args, Discord, GoogleApis, GoogleSpreadsheet, doc, GoogleSpreadsheetWorksheet, sheet5, bot, whichBoard) {
+  execute(message, args, Discord, GoogleApis, GoogleSpreadsheet, doc, GoogleSpreadsheetWorksheet, sheetUNV_10, devsheetUNV_11, bot, whichBoard, isDevMode, ADMIN_ID) {
     let type = args[0];
     let entryValue;
     let commanderName = (message.member.nickname ? message.member.nickname : message.member.user.username);
-    let allowedWords = ['bxp-coop', 'coopbxp', 'killsteal', 'ks', 'steal'];
+    let allowedWords = ['coopbxp', 'killsteal'];
     if (allowedWords.includes(args[0])) {
       let val = parseInt(args[1]);
       if (val > 0) entryValue = args[1];
@@ -30,10 +31,13 @@ module.exports = {
     } else {
       return message.channel.send("Sorry I don't recognize that command. Please check the pinned help guide on how to use the CANUKBot.");
     }
-    if (type === 'bxp-coop' || type === 'coopbxp') {
-      addEntryToSheetBXP('A', 'B');
-    } else if (type === 'killsteal' || type === 'ks' || type === 'steal') {
-      addEntryToSheetKILLSTEAL('D', 'E');
+    switch (type) {
+      case 'coopbxp':
+        addEntryToSheetBXP('A', 'B');
+        break;
+      case 'killsteal':
+        addEntryToSheetKILLSTEAL('D', 'E');
+        break;
     }
 
     /**
@@ -43,96 +47,137 @@ module.exports = {
      */
 
     function addEntryToSheetBXP(sheetCol1, sheetCol2) {
-
-      // Change below for each type
-
-      let highScore = sheet5.getCellByA1(sheetCol2 + 5).formattedValue;
-      highScore = parseInt(highScore);
-      entryValue = Math.abs(entryValue);
-      let valueDifferenceHS = highScore - entryValue;
-      let valueDifferenceNewHS = entryValue - highScore;
-      if (highScore > entryValue) {
-        message.channel.send('Sorry ' + commanderName + ', you are ' + Math.abs(valueDifferenceHS) + ' from the current high score!');
-        gsUpdateAdd(commanderName, entryValue, sheetCol1, sheetCol2, 10);
-      } else if (highScore < entryValue) {
-        message.channel.send('Well done ' + commanderName + '! Your entry is the new high score by a margin of ' + Math.abs(valueDifferenceNewHS) + '!\nThis high score has been forwarded to a commander for verification.');
-        whichBoard = 5;
-        verification.execute(message, args, Discord, bot, {
-          commanderName,
-          val: entryValue,
-          sheetCol1,
-          sheetCol2,
-          startingRowNumber: 10,
-          sheetName: 'NEWUNIVERSAL'
-        });
-      } else if (highScore === entryValue) {
-        message.channel.send("It's a tie!");
-        whichBoard = 5;
-        verification.execute(message, args, Discord, bot, {
-          commanderName,
-          val: entryValue,
-          sheetCol1,
-          sheetCol2,
-          startingRowNumber: 10,
-          sheetName: 'NEWUNIVERSAL'
-        });
+      if (isDevMode === true && message.member.id === ADMIN_ID) {
+        let highScore = devsheetUNV_11.getCellByA1(sheetCol2 + 5).formattedValue;
+        highScore = parseInt(highScore);
+        entryValue = Math.abs(entryValue);
+        let valueDifferenceHS = highScore - entryValue;
+        let valueDifferenceNewHS = entryValue - highScore;
+        if (highScore > entryValue) {
+          message.channel.send('Sorry ' + commanderName + ', you are ' + Math.abs(valueDifferenceHS) + ' from the current high score!');
+          gsUpdateAdd(commanderName, entryValue, sheetCol1, sheetCol2, 10);
+        } else if (highScore < entryValue) {
+          message.channel.send('Well done ' + commanderName + '! Your entry is the new high score by a margin of ' + Math.abs(valueDifferenceNewHS) + '!\nThis high score has been forwarded to a commander for verification.');
+          whichBoard = 5;
+          verification.execute(message, args, Discord, bot, {
+            commanderName,
+            val: entryValue,
+            sheetCol1,
+            sheetCol2,
+            startingRowNumber: 10,
+            sheetName: 'NEWUNIVERSAL'
+          }, whichBoard);
+        } else if (highScore === entryValue) {
+          message.channel.send("It's a tie!");
+          whichBoard = 5;
+          verification.execute(message, args, Discord, bot, {
+            commanderName,
+            val: entryValue,
+            sheetCol1,
+            sheetCol2,
+            startingRowNumber: 10,
+            sheetName: 'NEWUNIVERSAL'
+          }, whichBoard);
+        }
+      } else {
+          let highScore = sheetUNV_10.getCellByA1(sheetCol2 + 5).formattedValue;
+          highScore = parseInt(highScore);
+          entryValue = Math.abs(entryValue);
+          let valueDifferenceHS = highScore - entryValue;
+          let valueDifferenceNewHS = entryValue - highScore;
+          if (highScore > entryValue) {
+            message.channel.send('Sorry ' + commanderName + ', you are ' + Math.abs(valueDifferenceHS) + ' from the current high score!');
+            gsUpdateAdd(commanderName, entryValue, sheetCol1, sheetCol2, 10);
+          } else if (highScore < entryValue) {
+            message.channel.send('Well done ' + commanderName + '! Your entry is the new high score by a margin of ' + Math.abs(valueDifferenceNewHS) + '!\nThis high score has been forwarded to a commander for verification.');
+            whichBoard = 5;
+            verification.execute(message, args, Discord, bot, {
+              commanderName,
+              val: entryValue,
+              sheetCol1,
+              sheetCol2,
+              startingRowNumber: 10,
+              sheetName: 'DEV_UNIVERSAL'
+            }, whichBoard);
+          } else if (highScore === entryValue) {
+            message.channel.send("It's a tie!");
+            whichBoard = 5;
+            verification.execute(message, args, Discord, bot, {
+              commanderName,
+              val: entryValue,
+              sheetCol1,
+              sheetCol2,
+              startingRowNumber: 10,
+              sheetName: 'DEV_UNIVERSAL'
+            }, whichBoard);
+          }
       }
     }
+
     function addEntryToSheetKILLSTEAL(sheetCol1, sheetCol2) {
-
-      // Change below for each type
-
-      let highScore = sheet5.getCellByA1(sheetCol2 + 5).formattedValue;
-      highScore = parseInt(highScore);
-      entryValue = Math.abs(entryValue);
-      let valueDifferenceHS = entryValue - highScore;
-      let valueDifferenceNewHS = highScore - entryValue;
-      if (entryValue > highScore) {
-        message.channel.send('Sorry ' + commanderName + ', you are ' + Math.abs(valueDifferenceHS) + ' from the current high score!');
-        gsUpdateAdd(commanderName, entryValue, sheetCol1, sheetCol2, 10);
-      } else if (entryValue < highScore) {
-        message.channel.send('Well done ' + commanderName + '! Your entry is the new high score by a margin of ' + Math.abs(valueDifferenceNewHS) + '!\nThis high score has been forwarded to a commander for verification.');
-        verification.execute(message, args, Discord, bot, {
-          commanderName,
-          val: entryValue,
-          sheetCol1,
-          sheetCol2,
-          startingRowNumber: 10,
-          sheetName: 'NEWUNIVERSAL'
-        });
-      }else if (highScore === entryValue) {
-        message.channel.send("It's a tie!");
-        verification.execute(message, args, Discord, bot, {
-          commanderName,
-          val: entryValue,
-          sheetCol1,
-          sheetCol2,
-          startingRowNumber: 10,
-          sheetName: 'NEWUNIVERSAL'
-        });
+      if (isDevMode === true && message.member.id === ADMIN_ID) {
+        let highScore = devsheetUNV_11.getCellByA1(sheetCol2 + 5).formattedValue;
+        highScore = parseInt(highScore);
+        entryValue = Math.abs(entryValue);
+        let valueDifferenceHS = entryValue - highScore;
+        let valueDifferenceNewHS = highScore - entryValue;
+        if (entryValue > highScore) {
+          message.channel.send('Sorry ' + commanderName + ', you are ' + Math.abs(valueDifferenceHS) + ' from the current high score!');
+          gsUpdateAdd(commanderName, entryValue, sheetCol1, sheetCol2, 10);
+        } else if (entryValue < highScore) {
+          message.channel.send('Well done ' + commanderName + '! Your entry is the new high score by a margin of ' + Math.abs(valueDifferenceNewHS) + '!\nThis high score has been forwarded to a commander for verification.');
+          verification.execute(message, args, Discord, bot, {
+            commanderName,
+            val: entryValue,
+            sheetCol1,
+            sheetCol2,
+            startingRowNumber: 10,
+            sheetName: 'NEWUNIVERSAL'
+          });
+        }else if (highScore === entryValue) {
+          message.channel.send("It's a tie!");
+          verification.execute(message, args, Discord, bot, {
+            commanderName,
+            val: entryValue,
+            sheetCol1,
+            sheetCol2,
+            startingRowNumber: 10,
+            sheetName: 'NEWUNIVERSAL'
+          });
+        }
+      } else {
+          let highScore = sheetUNV_10.getCellByA1(sheetCol2 + 5).formattedValue;
+          highScore = parseInt(highScore);
+          entryValue = Math.abs(entryValue);
+          let valueDifferenceHS = entryValue - highScore;
+          let valueDifferenceNewHS = highScore - entryValue;
+          if (entryValue > highScore) {
+            message.channel.send('Sorry ' + commanderName + ', you are ' + Math.abs(valueDifferenceHS) + ' from the current high score!');
+            gsUpdateAdd(commanderName, entryValue, sheetCol1, sheetCol2, 10);
+          } else if (entryValue < highScore) {
+            message.channel.send('Well done ' + commanderName + '! Your entry is the new high score by a margin of ' + Math.abs(valueDifferenceNewHS) + '!\nThis high score has been forwarded to a commander for verification.');
+            verification.execute(message, args, Discord, bot, {
+              commanderName,
+              val: entryValue,
+              sheetCol1,
+              sheetCol2,
+              startingRowNumber: 10,
+              sheetName: 'NEWUNIVERSAL'
+            });
+          }else if (highScore === entryValue) {
+            message.channel.send("It's a tie!");
+            verification.execute(message, args, Discord, bot, {
+              commanderName,
+              val: entryValue,
+              sheetCol1,
+              sheetCol2,
+              startingRowNumber: 10,
+              sheetName: 'NEWUNIVERSAL'
+            });
+          }
       }
     }
   }
-}
-
-
-async function gsrun(cl) {
-  const gsapi = google.sheets({
-    version: 'v4',
-    auth: cl
-  });
-  const spreadsheetSizeObjects = {
-    spreadsheetId: spreadsheet_id,
-    range: 'NEWUNIVERSAL!B5'
-  }
-  let dataSizeFromSheets = await gsapi.spreadsheets.values.get(spreadsheetSizeObjects);
-  const dataSize = dataSizeFromSheets.data.values;
-  const songObjects = {
-    spreadsheetId: spreadsheet_id,
-    range: "NEWUNIVERSAL!A5:B5" + dataSize.toString()
-  };
-  let dataSO = await gsapi.spreadsheets.values.get(songObjects);
-  const arrayOfSpreadsheetValues = dataSO.data.values;
 }
 
 
@@ -140,6 +185,16 @@ async function gsLightRun(columnLetter, startingRowNumber) {
   const spreadsheetSizeObjects = {
     spreadsheetId: spreadsheet_id,
     range: 'NEWUNIVERSAL!' + columnLetter.toString() + 4
+  }
+  let dataSizeFromSheets = await gsapi.spreadsheets.values.get(spreadsheetSizeObjects);
+  const dataSize = dataSizeFromSheets.data.values;
+  return parseInt(dataSize) + parseInt(startingRowNumber);
+}
+
+async function gsLightDevRun(columnLetter, startingRowNumber) {
+  const spreadsheetSizeObjects = {
+    spreadsheetId: spreadsheet_id,
+    range: 'DEV_UNIVERSAL!' + columnLetter.toString() + 4
   }
   let dataSizeFromSheets = await gsapi.spreadsheets.values.get(spreadsheetSizeObjects);
   const dataSize = dataSizeFromSheets.data.values;
@@ -171,9 +226,38 @@ function gsUpdateAdd(name, val, columnLetter, nextColumnLetter, startingRowNumbe
       }
     })
         .then(function (response) {
+              console.log("Updated Range: " + response.data.updates.updatedRange);
+            },
+            function (err) {
+              console.error("Execute error", err);
+            });
+  });
+}
 
-              // Handle the results here (response.result has the parsed body).
-
+function gsUpdateDevAdd(name, val, columnLetter, nextColumnLetter, startingRowNumber) {
+  gsLightDevRun(columnLetter, startingRowNumber).then((newRowToOverwrite) => {
+    const gsapi = google.sheets({
+      version: 'v4',
+      auth: client2
+    });
+    const givenRange = columnLetter.toString() + newRowToOverwrite.toString() + ":" + nextColumnLetter.toString() + newRowToOverwrite.toString();
+    gsapi.spreadsheets.values.append({
+      "spreadsheetId": spreadsheet_id,
+      "range": givenRange,
+      "includeValuesInResponse": true,
+      "responseDateTimeRenderOption": "FORMATTED_STRING",
+      "responseValueRenderOption": "FORMATTED_VALUE",
+      "valueInputOption": "USER_ENTERED",
+      "resource": {
+        "values": [
+          [
+            name,
+            val
+          ]
+        ]
+      }
+    })
+        .then(function (response) {
               console.log("Updated Range: " + response.data.updates.updatedRange);
             },
             function (err) {

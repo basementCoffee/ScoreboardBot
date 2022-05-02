@@ -32,14 +32,14 @@ async function initializeAuth() {
     });
     await doc.loadInfo(); // loads document properties and worksheets
     console.log(doc.title); // title of the sheet
-    sheet1 = await doc.sheetsByIndex[7];
+    sheet1 = await doc.sheetsByIndex[2];
 }
 
 
 module.exports = {
     name: 'cruiserscores',
     description: "Cruiser Scoreboard!",
-    execute(message, args, bot) {
+    execute(message, args, bot, isDevMode, ADMIN_ID) {
         const getCruiserScoreboardEmbed = () => {
             const cruiserScoreBoardEmbed = new MessageEmbed();
             const description =
@@ -70,7 +70,7 @@ module.exports = {
             return cruiserScoreBoardEmbed;
         }
         try {
-            bot.channels.cache.get('895160324607586315').messages.fetch('967697234533695488').then((x) => {
+            bot.channels.cache.get('841438933824569375').messages.fetch('928438774629806210').then((x) => {
                 x.edit('Updating the Cruiser Scoreboard...').then(() => {
                     sheet1.loadCells('A1:BD500').then(() => {
                         x.edit('Cruiser Scoreboard:');
@@ -81,7 +81,7 @@ module.exports = {
         }
         catch (e) {
             console.log('Cannot find the the scoreboard embed.');
-            bot.channels.cache.get('852991463428063272').send('Oi some idiot deleted the original pinned leaderboard. Make sure you replace the fetch id with the new one in the code!');
+            bot.channels.cache.get('802071947088625694').send('Oi some hoser deleted the original pinned leaderboard. Make sure you replace the fetch id with the new one in the code!');
             bot.channels.cache.get('841438933824569375').send.then((x) => {
                 x.edit('Updating scoreboard...').then(() => {
                     sheet1.loadCells('A1:BD500').then(() => {

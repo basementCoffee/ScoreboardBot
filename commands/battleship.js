@@ -1,12 +1,13 @@
 require('dotenv').config();
 
-
 const private_key = process.env.PRIVATE_KEY.replace(/\\n/gm, '\n');
 const client_email = process.env.CLIENT_EMAIL.replace(/\\n/gm, '\n');
 const spreadsheet_id = process.env.SPREADSHEET_ID.replace(/\\n/gm, '\n');
 const {sendHighScoreMessage, sendNotHighScoreMessage} = require('./utils/utils')
-const {google} = require('googleapis');
+const {google, GoogleApis} = require('googleapis');
 const verification = require('./verification');
+const Discord = require("discord.js");
+const {GoogleSpreadsheet, GoogleSpreadsheetWorksheet} = require("google-spreadsheet");
 const client2 = new google.auth.JWT(client_email, null, private_key, [
     'https://www.googleapis.com/auth/spreadsheets'
 ]);
@@ -19,7 +20,7 @@ const gsapi = google.sheets({
 module.exports = {
     name: 'battleship',
     description: "battleship commands",
-    execute(message, args, Discord, GoogleApis, GoogleSpreadsheet, doc, GoogleSpreadsheetWorksheet, sheet0, bot, whichBoard) {
+    execute(message, args, Discord, GoogleApis, GoogleSpreadsheet, doc, GoogleSpreadsheetWorksheet, sheetBB_0, devsheetBB_1, bot, whichBoard, isDevMode, ADMIN_ID) {
         let type = args[0];
         let entryValue;
         let commanderName = (message.member.nickname ? message.member.nickname : message.member.user.username);
@@ -27,49 +28,130 @@ module.exports = {
         if (allowedWords.includes(args[0])) {
             let val = parseInt(args[1]);
             if (val > 0) entryValue = args[1];
-            //else return message.channel.send("Sorry I don't recognize that command. Please check the pinned help guide on how to use the CANUKBot.");
         }
         else {
             return message.channel.send("Sorry I don't recognize that command. Please check the pinned help guide on how to use the CANUKBot.");
         }
-        if (type === 'kills') {
-            addEntryToSheet('A', 'B');
-        } else if (type === 'mbh') {
-            addEntryToSheet('D', 'E');
-        } else if (type === 'cits') {
-            addEntryToSheet('G', 'H');
-        } else if (type === 'incaps') {
-            addEntryToSheet('J', 'K');
-        } else if (type === 'fires') {
-            addEntryToSheet('M', 'N');
-        } else if (type === 'secondaries') {
-            addEntryToSheet('P', 'Q');
-        } else if (type === 'planekills') {
-            addEntryToSheet('S', 'T');
-        } else if (type === 'torps') {
-            addEntryToSheet('V', 'W');
-        } else if (type === 'floods') {
-            addEntryToSheet('Y', 'Z');
-        } else if (type === 'subhits') {
-            addEntryToSheet('AB', 'AC');
-        } else if (type === 'airstrike') {
-            addEntryToSheet('AE', 'AF');
-        } else if (type === 'spots') {
-            addEntryToSheet('AH', 'AI');
-        } else if (type === 'caps') {
-            addEntryToSheet('AK', 'AL');
-        } else if (type === 't7bxp') {
-            addEntryToSheet('AN', 'AO');
-        } else if (type === 't7dmg') {
-            addEntryToSheet('AQ', 'AR');
-        } else if (type === 'dmg') {
-            addEntryToSheet('AT', 'AU');
-        } else if (type === 'bxp') {
-            addEntryToSheet('AW', 'AX');
-        } else if (type === 'tanked') {
-            addEntryToSheet('AZ', 'BA');
-        } else if (type === 'spottingdmg') {
-            addEntryToSheet('BC', 'BD');
+        if (isDevMode === true && message.member.id === ADMIN_ID) {
+            switch (type) {
+                case 'kills':
+                    addEntryToDevSheet('A', 'B');
+                break;
+                case 'mbh':
+                    addEntryToDevSheet('D', 'E');
+                break;
+                case 'cits':
+                    addEntryToDevSheet('G', 'H');
+                break;
+                case 'incaps':
+                    addEntryToDevSheet('J', 'K');
+                break;
+                case 'fires':
+                    addEntryToDevSheet('M', 'N');
+                break;
+                case 'secondaries':
+                    addEntryToDevSheet('P', 'Q');
+                break;
+                case 'planekills':
+                    addEntryToDevSheet('S', 'T');
+                break;
+                case 'torps':
+                    addEntryToDevSheet('V', 'W');
+                break;
+                case 'floods':
+                    addEntryToDevSheet('Y', 'Z');
+                break;
+                case 'subhits':
+                    addEntryToDevSheet('AB', 'AC');
+                break;
+                case 'airstrike':
+                    addEntryToDevSheet('AE', 'AF');
+                break;
+                case 'spots':
+                    addEntryToDevSheet('AH', 'AI');
+                break;
+                case 'caps':
+                    addEntryToDevSheet('AK', 'AL');
+                break;
+                case 't7bxp':
+                    addEntryToDevSheet('AN', 'AO');
+                break;
+                case 't7dmg':
+                    addEntryToDevSheet('AQ', 'AR');
+                break;
+                case 'dmg':
+                    addEntryToDevSheet('AT', 'AU');
+                break;
+                case 'bxp':
+                    addEntryToDevSheet('AW', 'AX');
+                break;
+                case 'tanked':
+                    addEntryToDevSheet('AZ', 'BA');
+                break;
+                case 'spottingdmg':
+                    addEntryToDevSheet('BC', 'BD');
+                break;
+            }
+        } else {
+            switch (type) {
+                case 'kills':
+                    addEntryToSheet('A', 'B');
+                break;
+                case 'mbh':
+                    addEntryToSheet('D', 'E');
+                break;
+                case 'cits':
+                    addEntryToSheet('G', 'H');
+                break;
+                case 'incaps':
+                    addEntryToSheet('J', 'K');
+                break;
+                case 'fires':
+                    addEntryToSheet('M', 'N');
+                break;
+                case 'secondaries':
+                    addEntryToSheet('P', 'Q');
+                break;
+                case 'planekills':
+                    addEntryToSheet('S', 'T');
+                break;
+                case 'torps':
+                    addEntryToSheet('V', 'W');
+                break;
+                case 'floods':
+                    addEntryToSheet('Y', 'Z');
+                break;
+                case 'subhits':
+                    addEntryToSheet('AB', 'AC');
+                break;
+                case 'airstrike':
+                    addEntryToSheet('AE', 'AF');
+                break;
+                case 'spots':
+                    addEntryToSheet('AH', 'AI');
+                break;
+                case 'caps':
+                    addEntryToSheet('AK', 'AL');
+                break;
+                case 't7bxp':
+                    addEntryToSheet('AN', 'AO');
+                break;
+                case 't7dmg':
+                    addEntryToSheet('AQ', 'AR');
+                break;
+                case 'dmg':
+                    addEntryToSheet('AT', 'AU');
+                break;
+                case 'bxp':
+                    addEntryToSheet('AW', 'AX');
+                break;
+                case 'tanked':
+                    addEntryToSheet('AZ', 'BA');
+                break;
+                case 'spottingdmg':
+                    addEntryToSheet('BC', 'BD');
+                break;
+            }
         }
 
         /**
@@ -79,9 +161,8 @@ module.exports = {
          */
 
         async function addEntryToSheet(sheetCol1, sheetCol2) {
-
             // Change below for each type
-            let highScore = sheet0.getCellByA1(sheetCol2 + 5).formattedValue;
+            let highScore = sheetBB_0.getCellByA1(sheetCol2 + 5).formattedValue;
             highScore = parseInt(highScore);
             entryValue = Math.abs(entryValue);
             let valueDifferenceHS = highScore - entryValue;
@@ -93,7 +174,7 @@ module.exports = {
                 let prevMessage = await sendHighScoreMessage(message, commanderName, valueDifferenceNewHS);
                 // Passes on to verification which board to update
                 whichBoard = 0;
-                verification.execute(message, args, Discord, bot, {
+                verification.execute(message, args, Discord, bot,  {
                     commanderName,
                     val: entryValue,
                     sheetCol1,
@@ -101,7 +182,7 @@ module.exports = {
                     startingRowNumber: 10,
                     sheetName: 'NEWBB',
                     prevMessage
-                });
+                }, whichBoard, isDevMode, ADMIN_ID);
             } else if (highScore === entryValue) {
                 message.channel.send("It's a tie!");
                 whichBoard = 0;
@@ -112,31 +193,48 @@ module.exports = {
                     sheetCol2,
                     startingRowNumber: 10,
                     sheetName: 'NEWBB'
-                });
+                }, whichBoard, isDevMode, ADMIN_ID);
+            }
+        }
+
+        async function addEntryToDevSheet(sheetCol1, sheetCol2) {
+            // Change below for each type
+            let devhighScore = devsheetBB_1.getCellByA1(sheetCol2 + 5).formattedValue;
+            devhighScore = parseInt(devhighScore);
+            entryValue = Math.abs(entryValue);
+            let valueDifferenceHS = devhighScore - entryValue;
+            let valueDifferenceNewHS = entryValue - devhighScore;
+            if (devhighScore > entryValue) {
+                sendNotHighScoreMessage(message, commanderName, valueDifferenceHS);
+                gsUpdateDevAdd(commanderName, entryValue, sheetCol1, sheetCol2, 10);
+            } else if (devhighScore < entryValue) {
+                let prevMessage = await sendHighScoreMessage(message, commanderName, valueDifferenceNewHS);
+                whichBoard = 0;
+                isDevMode = true;
+                verification.execute(message, args, Discord, bot,  {
+                    commanderName,
+                    val: entryValue,
+                    sheetCol1,
+                    sheetCol2,
+                    startingRowNumber: 10,
+                    sheetName: 'DEV_BB',
+                    prevMessage
+                }, whichBoard, isDevMode, ADMIN_ID);
+            } else if (devhighScore === entryValue) {
+                message.channel.send("It's a tie!");
+                whichBoard = 0;
+                isDevMode = true;
+                verification.execute(message, args, Discord, bot, {
+                    commanderName,
+                    val: entryValue,
+                    sheetCol1,
+                    sheetCol2,
+                    startingRowNumber: 10,
+                    sheetName: 'DEV_BB'
+                }, whichBoard, isDevMode, ADMIN_ID);
             }
         }
     }
-    // add scoreboard update call here from verification
-}
-
-
-async function gsrun(cl) {
-    const gsapi = google.sheets({
-        version: 'v4',
-        auth: cl
-    });
-    const spreadsheetSizeObjects = {
-        spreadsheetId: spreadsheet_id,
-        range: 'NEWBB!B5'
-    }
-    let dataSizeFromSheets = await gsapi.spreadsheets.values.get(spreadsheetSizeObjects);
-    const dataSize = dataSizeFromSheets.data.values;
-    const songObjects = {
-        spreadsheetId: spreadsheet_id,
-        range: "NEWBB!A5:B5" + dataSize.toString()
-    };
-    let dataSO = await gsapi.spreadsheets.values.get(songObjects);
-    const arrayOfSpreadsheetValues = dataSO.data.values;
 }
 
 
@@ -144,6 +242,16 @@ async function gsLightRun(columnLetter, startingRowNumber) {
     const spreadsheetSizeObjects = {
         spreadsheetId: spreadsheet_id,
         range: 'NEWBB!' + columnLetter.toString() + 4
+    }
+    let dataSizeFromSheets = await gsapi.spreadsheets.values.get(spreadsheetSizeObjects);
+    const dataSize = dataSizeFromSheets.data.values;
+    return parseInt(dataSize) + parseInt(startingRowNumber);
+}
+
+async function gsLightDevRun(columnLetter, startingRowNumber) {
+    const spreadsheetSizeObjects = {
+        spreadsheetId: spreadsheet_id,
+        range: 'DEV_BB!' + columnLetter.toString() + 4
     }
     let dataSizeFromSheets = await gsapi.spreadsheets.values.get(spreadsheetSizeObjects);
     const dataSize = dataSizeFromSheets.data.values;
@@ -175,7 +283,39 @@ function gsUpdateAdd(name, val, columnLetter, nextColumnLetter, startingRowNumbe
             }
         })
             .then(function (response) {
+                    // Handle the results here (response.result has the parsed body).
+                    console.log("Updated Range: " + response.data.updates.updatedRange);
+                },
+                function (err) {
+                    console.error("Execute error", err);
+                });
+    });
+}
 
+function gsUpdateDevAdd(name, val, columnLetter, nextColumnLetter, startingRowNumber) {
+    gsLightDevRun(columnLetter, startingRowNumber).then((newRowToOverwrite) => {
+        const gsapi = google.sheets({
+            version: 'v4',
+            auth: client2
+        });
+        const givenRange = columnLetter.toString() + newRowToOverwrite.toString() + ":" + nextColumnLetter.toString() + newRowToOverwrite.toString();
+        gsapi.spreadsheets.values.append({
+            "spreadsheetId": spreadsheet_id,
+            "range": givenRange,
+            "includeValuesInResponse": true,
+            "responseDateTimeRenderOption": "FORMATTED_STRING",
+            "responseValueRenderOption": "FORMATTED_VALUE",
+            "valueInputOption": "USER_ENTERED",
+            "resource": {
+                "values": [
+                    [
+                        name,
+                        val
+                    ]
+                ]
+            }
+        })
+            .then(function (response) {
                     // Handle the results here (response.result has the parsed body).
                     console.log("Updated Range: " + response.data.updates.updatedRange);
                 },

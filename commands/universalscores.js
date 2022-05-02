@@ -1,6 +1,5 @@
 require('dotenv').config();
 
-
 const private_key = process.env.PRIVATE_KEY.replace(/\\n/gm, '\n');
 const client_email = process.env.CLIENT_EMAIL.replace(/\\n/gm, '\n');
 const spreadsheet_id = process.env.SPREADSHEET_ID.replace(/\\n/gm, '\n');
@@ -32,14 +31,14 @@ async function initializeAuth() {
     });
     await doc.loadInfo(); // loads document properties and worksheets
     console.log(doc.title); // title of the sheet
-    sheet5 = await doc.sheetsByIndex[11];
+    sheet5 = await doc.sheetsByIndex[10];
 }
 
 
 module.exports = {
     name: 'universalscores',
     description: "Universal Categories Scoreboard!",
-    execute(message, args, bot) {
+    execute(message, args, bot, isDevMode, ADMIN_ID) {
         const getUniversalScoreboardEmbed = () => {
             const universalScoreBoardEmbed = new MessageEmbed();
             const description =
@@ -53,7 +52,7 @@ module.exports = {
             return universalScoreBoardEmbed;
         }
         try {
-            bot.channels.cache.get('895160324607586315').messages.fetch('967697236014276658').then((x) => {
+            bot.channels.cache.get('841438933824569375').messages.fetch('928438781802070036').then((x) => {
                 x.edit('Updating the Universal Categories Scoreboard...').then(() => {
                     sheet5.loadCells('A1:E500').then(() => {
                         x.edit('Universal Categories Scoreboard:');
@@ -64,7 +63,7 @@ module.exports = {
         }
         catch (e) {
             console.log('Cannot find the the scoreboard embed.');
-            bot.channels.cache.get('852991463428063272').send('Oi some idiot deleted the original pinned leaderboard. Make sure you replace the fetch id with the new one in the code!');
+            bot.channels.cache.get('802071947088625694').send('Oi some idiot deleted the original pinned leaderboard. Make sure you replace the fetch id with the new one in the code!');
             bot.channels.cache.get('841438933824569375').send.then((x) => {
                 x.edit('Updating scoreboard...').then(() => {
                     sheet5.loadCells('A1:E500').then(() => {

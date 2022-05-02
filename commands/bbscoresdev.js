@@ -31,7 +31,7 @@ async function initializeAuth() {
     });
     await doc.loadInfo(); // loads document properties and worksheets
     console.log(doc.title); // title of the sheet
-    sheet0 = await doc.sheetsByIndex[0];
+    sheet0 = await doc.sheetsByIndex[1];
 }
 
 
