@@ -39,7 +39,6 @@ module.exports = {
                         console.log("whichBoard:" + whichBoard);
                         //console.log(isDevMode);
                         // return;
-
                         // TBD: unsure whether gsUpdateDevAdd and gsLightDevRun are actually necessary; dev sheet info should be passed from ship.js to verification
                         // TypeError: Cannot read properties of undefined (reading 'execute') maybe needs to be in an await?
 
@@ -47,7 +46,7 @@ module.exports = {
                         await new Promise(res => setTimeout(res, 5000));
                         if (whichBoard === 0) {
                             console.log("POOBA:" + whichBoard + isDevMode);
-                            bot.commands.get('bbscoresdev').execute(message, args, bot);
+                            bot.commands.get('bbdevscores').execute(message, args, bot);
                             //isDevMode = true;
                             //console.log("ROOBA:" + whichBoard + isDevMode);
                             // TBD: are all of these whichBoard = 6 necessary?
