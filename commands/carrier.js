@@ -1,6 +1,5 @@
 require('dotenv').config();
 
-
 const private_key = process.env.PRIVATE_KEY.replace(/\\n/gm, '\n');
 const client_email = process.env.CLIENT_EMAIL.replace(/\\n/gm, '\n');
 const spreadsheet_id = process.env.SPREADSHEET_ID.replace(/\\n/gm, '\n');
@@ -21,7 +20,7 @@ const gsapi = google.sheets({
 module.exports = {
   name: 'carrier',
   description: "carrier commands",
-  execute(message, args, Discord, GoogleApis, GoogleSpreadsheet, doc, GoogleSpreadsheetWorksheet, sheetCV_6, devsheetCV_7, bot, whichBoard, isDevMode, ADMIN_ID) {
+  execute(message, args, Discord, GoogleApis, GoogleSpreadsheet, doc, GoogleSpreadsheetWorksheet, bot, whichBoard, isDevMode, ADMIN_ID) {
     let type = args[0];
     let entryValue;
     let commanderName = (message.member.nickname ? message.member.nickname : message.member.user.username);

@@ -57,7 +57,7 @@ module.exports = {
                             bot.commands.get('cvdevscores').execute(message, args, bot);
                         } else if (whichBoard === 9) {
                             bot.commands.get('universaldevscores').execute(message, args, bot);
-                        } else if (whichBoard == undefined) {
+                        } else if (whichBoard === undefined) {
                             bot.commands.get('bbdevscores').execute(message, args, bot);
                             bot.commands.get('cruiserdevscores').execute(message, args, bot);
                             bot.commands.get('dddevscores').execute(message, args, bot);
@@ -111,25 +111,15 @@ module.exports = {
                         await new Promise(res => setTimeout(res, 5000));
                         if (whichBoard === 0) {
                             bot.commands.get('bbscores').execute(message, args, bot);
-                            console.log(whichBoard);
-                            whichBoard = 6;
                         } else if (whichBoard === 2) {
                             bot.commands.get('cruiserscores').execute(message, args, bot);
-                            console.log(whichBoard);
-                            whichBoard = 6;
                         } else if (whichBoard === 4) {
                             bot.commands.get('ddscores').execute(message, args, bot);
-                            console.log(whichBoard);
-                            whichBoard = 6;
                         } else if (whichBoard === 6) {
                             bot.commands.get('cvscores').execute(message, args, bot);
-                            console.log(whichBoard);
-                            whichBoard = 6;
                         } else if (whichBoard === 8) {
                             bot.commands.get('universalscores').execute(message, args, bot);
-                            console.log(whichBoard);
-                            whichBoard = 6;
-                        } else if (whichBoard == undefined) {
+                        } else if (whichBoard === undefined) {
                             bot.commands.get('bbscores').execute(message, args, bot);
                             bot.commands.get('cruiserscores').execute(message, args, bot);
                             bot.commands.get('ddscores').execute(message, args, bot);

@@ -83,8 +83,6 @@ async function initializeAuth() {
     console.log(sheetSUB_8.title);
     console.log(sheetUNV_10.title);
 }
-// do i need to add a new await for the dev to load in the new sheets; is it inefficient to load in all the sheets and allow for toggling of dev mode
-// db-bot is crashing on pi
 
 
 // Authenticate with the Google Spreadsheets API.
@@ -113,17 +111,6 @@ for (const file of commandFiles) {
     bot.commands.set(command.name, command);
 }
 
-
-// read dir to find devscoreboards for verification.js fork
-
-/**
-bot.devScores = new Discord.Collection();
-const devScoreFiles = fs.readdirSync('./commands/devscoreboards/').filter(file => file.endsWith('.js'));
-for (const file of devScoreFiles) {
-    const command = require(`./commands/devscoreboards/${file}`);
-    bot.devScores.set(command.name, command);
-}
-*/
 
 // Console log on wake
 bot.once('ready', () => {
@@ -155,33 +142,33 @@ bot.on('message', message => {
         case 'bb':
             if (isDevMode === true && message.member.id === ADMIN_ID) {
                 devsheetBB_1.loadCells('A1:BD500').then(() =>
-                    bot.commands.get('battleship').execute(message, args, Discord, GoogleApis, GoogleSpreadsheet, doc, GoogleSpreadsheetWorksheet, sheetBB_0, devsheetBB_1, bot, whichBoard, isDevMode, ADMIN_ID)
+                    bot.commands.get('battleship').execute(message, args, Discord, GoogleApis, GoogleSpreadsheet, doc, GoogleSpreadsheetWorksheet, bot, whichBoard, isDevMode, ADMIN_ID)
                 );
             } else {
                 sheetBB_0.loadCells('A1:BD500').then(() =>
-                    bot.commands.get('battleship').execute(message, args, Discord, GoogleApis, GoogleSpreadsheet, doc, GoogleSpreadsheetWorksheet, sheetBB_0, devsheetBB_1, bot, whichBoard, isDevMode, ADMIN_ID)
+                    bot.commands.get('battleship').execute(message, args, Discord, GoogleApis, GoogleSpreadsheet, doc, GoogleSpreadsheetWorksheet, bot, whichBoard, isDevMode, ADMIN_ID)
                 );
             }
         break;
         case 'cruiser':
             if (isDevMode === true && message.member.id === ADMIN_ID) {
                 devsheetCA_3.loadCells('A1:BD500').then(() =>
-                    bot.commands.get('cruiser').execute(message, args, Discord, GoogleApis, GoogleSpreadsheet, doc, GoogleSpreadsheetWorksheet, sheetCA_2, devsheetCA_3, bot, whichBoard, isDevMode, ADMIN_ID)
+                    bot.commands.get('cruiser').execute(message, args, Discord, GoogleApis, GoogleSpreadsheet, doc, GoogleSpreadsheetWorksheet, bot, whichBoard, isDevMode, ADMIN_ID)
                 );
             } else {
                 sheetCA_2.loadCells('A1:BD500').then(() =>
-                    bot.commands.get('cruiser').execute(message, args, Discord, GoogleApis, GoogleSpreadsheet, doc, GoogleSpreadsheetWorksheet, sheetCA_2, devsheetCA_3, bot, whichBoard, isDevMode, ADMIN_ID)
+                    bot.commands.get('cruiser').execute(message, args, Discord, GoogleApis, GoogleSpreadsheet, doc, GoogleSpreadsheetWorksheet, bot, whichBoard, isDevMode, ADMIN_ID)
                 );
             }
         break;
         case 'dd':
             if (isDevMode === true && message.member.id === ADMIN_ID) {
                 devsheetDD_5.loadCells('A1:BD500').then(() =>
-                    bot.commands.get('destroyer').execute(message, args, Discord, GoogleApis, GoogleSpreadsheet, doc, GoogleSpreadsheetWorksheet, sheetDD_4, devsheetDD_5, bot, whichBoard, isDevMode, ADMIN_ID)
+                    bot.commands.get('destroyer').execute(message, args, Discord, GoogleApis, GoogleSpreadsheet, doc, GoogleSpreadsheetWorksheet, bot, whichBoard, isDevMode, ADMIN_ID)
                 );
             } else {
                 sheetDD_4.loadCells('A1:BD500').then(() =>
-                    bot.commands.get('destroyer').execute(message, args, Discord, GoogleApis, GoogleSpreadsheet, doc, GoogleSpreadsheetWorksheet, sheetDD_4, devsheetDD_5, bot, whichBoard, isDevMode, ADMIN_ID)
+                    bot.commands.get('destroyer').execute(message, args, Discord, GoogleApis, GoogleSpreadsheet, doc, GoogleSpreadsheetWorksheet, bot, whichBoard, isDevMode, ADMIN_ID)
                 );
             }
         break;
@@ -189,12 +176,12 @@ bot.on('message', message => {
             if (isDevMode === true && message.member.id === ADMIN_ID) {
                 console.log(isDevMode);
                 devsheetCV_7.loadCells('A1:AX500').then(() =>
-                    bot.commands.get('carrier').execute(message, args, Discord, GoogleApis, GoogleSpreadsheet, doc, GoogleSpreadsheetWorksheet, sheetCV_6, devsheetCV_7, bot, whichBoard, isDevMode, ADMIN_ID)
+                    bot.commands.get('carrier').execute(message, args, Discord, GoogleApis, GoogleSpreadsheet, doc, GoogleSpreadsheetWorksheet, bot, whichBoard, isDevMode, ADMIN_ID)
                 );
             } else {
                 console.log(isDevMode);
                 sheetCV_6.loadCells('A1:AX500').then(() =>
-                    bot.commands.get('carrier').execute(message, args, Discord, GoogleApis, GoogleSpreadsheet, doc, GoogleSpreadsheetWorksheet, sheetCV_6, devsheetCV_7, bot, whichBoard, isDevMode, ADMIN_ID)
+                    bot.commands.get('carrier').execute(message, args, Discord, GoogleApis, GoogleSpreadsheet, doc, GoogleSpreadsheetWorksheet, bot, whichBoard, isDevMode, ADMIN_ID)
                 );
             }
         break;
@@ -204,11 +191,11 @@ bot.on('message', message => {
         case 'universal':
             if (isDevMode === true && message.member.id === ADMIN_ID) {
                 devsheetUNV_11.loadCells('A1:E500').then(() =>
-                    bot.commands.get('universal').execute(message, args, Discord, GoogleApis, GoogleSpreadsheet, doc, GoogleSpreadsheetWorksheet, sheetUNV_10, devsheetUNV_11, bot, whichBoard, isDevMode, ADMIN_ID)
+                    bot.commands.get('universal').execute(message, args, Discord, GoogleApis, GoogleSpreadsheet, doc, GoogleSpreadsheetWorksheet, bot, whichBoard, isDevMode, ADMIN_ID)
                 );
             } else {
                 sheetUNV_10.loadCells('A1:E500').then(() =>
-                    bot.commands.get('universal').execute(message, args, Discord, GoogleApis, GoogleSpreadsheet, doc, GoogleSpreadsheetWorksheet, sheetUNV_10, devsheetUNV_11, bot, whichBoard, isDevMode, ADMIN_ID)
+                    bot.commands.get('universal').execute(message, args, Discord, GoogleApis, GoogleSpreadsheet, doc, GoogleSpreadsheetWorksheet, bot, whichBoard, isDevMode, ADMIN_ID)
                 );
             }
         break;
@@ -218,7 +205,7 @@ bot.on('message', message => {
             bot.commands.get('keys').execute(message, args, Discord);
         break;
         case 'info':
-            //message.channel.send(info);
+            message.channel.send("https://github.com/basementCoffee/ScoreboardBot");
         break;
         case 'skynet':
             message.channel.send("https://www.youtube.com/watch?v=_Wlsd9mljiU");
@@ -232,11 +219,11 @@ bot.on('message', message => {
             if (isDevMode) {
                 message.channel.send('*devmode is off*');
                 isDevMode = false;
-                message.channel.send("Supposed to say false ->" + isDevMode);
+                message.channel.send("Supposed to say false -> " + isDevMode);
             } else {
                 message.channel.send('*devmode is on*');
                 isDevMode = true;
-                message.channel.send("Supposed to say true ->" + isDevMode);
+                message.channel.send("Supposed to say true -> " + isDevMode);
             }
         break;
         case 'scores':
@@ -245,11 +232,20 @@ bot.on('message', message => {
                 return;
             }
             message.channel.send('The scoreboards are updating.');
-            bot.commands.get('bbscores').execute(message, args, bot);
-            bot.commands.get('ddscores').execute(message, args, bot);
-            bot.commands.get('cruiserscores').execute(message, args, bot);
-            bot.commands.get('cvscores').execute(message, args, bot);
-            bot.commands.get('universalscores').execute(message, args, bot);
+            if (isDevMode === true && message.member.id === ADMIN_ID) {
+                bot.commands.get('bbdevscores').execute(message, args, bot);
+                bot.commands.get('dddevscores').execute(message, args, bot);
+                bot.commands.get('cruiserdevscores').execute(message, args, bot);
+                bot.commands.get('cvdevscores').execute(message, args, bot);
+                bot.commands.get('universaldevscores').execute(message, args, bot);
+            } else {
+                bot.commands.get('bbscores').execute(message, args, bot);
+                bot.commands.get('ddscores').execute(message, args, bot);
+                bot.commands.get('cruiserscores').execute(message, args, bot);
+                bot.commands.get('cvscores').execute(message, args, bot);
+                bot.commands.get('universalscores').execute(message, args, bot);
+            }
+
         break;
         case 'sheet':
             let button = new disbut.MessageButton()
@@ -279,6 +275,8 @@ bot.on('message', message => {
             }
         break;
         case 'devstrike':
+        case 'update':
+        case 'detonate':
             if (message.member.id !== ADMIN_ID) {
                 message.channel.send('This feature has been limited to Admins only.')
                 return;

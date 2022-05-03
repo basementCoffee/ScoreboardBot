@@ -20,7 +20,7 @@ const gsapi = google.sheets({
 module.exports = {
     name: 'destroyer',
     description: "destroyer commands",
-    execute(message, args, Discord, GoogleApis, GoogleSpreadsheet, doc, GoogleSpreadsheetWorksheet, sheetDD_4, devsheetDD_5, bot, whichBoard, isDevMode, ADMIN_ID) {
+    execute(message, args, Discord, GoogleApis, GoogleSpreadsheet, doc, GoogleSpreadsheetWorksheet, bot, whichBoard, isDevMode, ADMIN_ID) {
         let type = args[0];
         let entryValue;
         let commanderName = (message.member.nickname ? message.member.nickname : message.member.user.username);
