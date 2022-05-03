@@ -100,26 +100,18 @@ doc.useServiceAccountAuth({
 
 // Bot initialization
 const fs = require('fs');
+
 const {MessageEmbed, Client} = require('discord.js');
 const bot = new Client();
 bot.commands = new Discord.Collection();
+
+
 const commandFiles = fs.readdirSync('./commands/').filter(file => file.endsWith('.js'));
 for (const file of commandFiles) {
     const command = require(`./commands/${file}`);
+
     bot.commands.set(command.name, command);
 }
-
-//const fs = require('fs');
-//const {MessageEmbed, Client} = require('discord.js');
-//const bot = new Client();
-//bot.commands = new Discord.Collection();
-//const commandFiles = fs.readdirSync('./commands/').filter(file => file.endsWith('.js'));
-//for (const file of commandFiles) {
-    //const command = require(`./commands/${file}`);
-    //bot.commands.set(command.name, command);
-
-
-
 
 
 // read dir to find devscoreboards for verification.js fork

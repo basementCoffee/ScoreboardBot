@@ -18,7 +18,7 @@ const {
 // Initialize the sheet
 
 var doc = new GoogleSpreadsheet(spreadsheet_id);
-var sheet2;
+var sheetDD_4;
 
 
 (async function () {
@@ -33,37 +33,37 @@ async function initializeAuth() {
     });
     await doc.loadInfo(); // loads document properties and worksheets
     console.log(doc.title); // title of the sheet
-    sheet2 = await doc.sheetsByIndex[4];
+    sheetDD_4 = await doc.sheetsByIndex[4];
 }
 
 
 module.exports = {
     name: 'ddscores',
     description: "DD Scoreboard!",
-    execute(message, args, bot, isDevMode, ADMIN_ID) {
+    execute(message, args, bot) {
         const getDDScoreboardEmbed = () => {
             const ddScoreBoardEmbed = new MessageEmbed();
             const description =
                 '\n-----------  **DESTROYER**  -----------\n' +
-                '\`DAMAGE:\`' + sheet2.getCellByA1('AU6').formattedValue + ' (' + abbreviateNumber(sheet2.getCellByA1('AU5').formattedValue) + ') \n' +
-                '\`BXP:\`' + sheet2.getCellByA1('AX6').formattedValue + ' (' + sheet2.getCellByA1('AX5').formattedValue + ') \n' +
-                '\`KILLS:\`' + sheet2.getCellByA1('B6').formattedValue + ' (' + abbreviateNumber(sheet2.getCellByA1('B5').formattedValue) + ') \n' +
-                '\`MBH:\`' + sheet2.getCellByA1('E6').formattedValue + ' (' + abbreviateNumber(sheet2.getCellByA1('E5').formattedValue) + ') \n' +
-                '\`CITADELS:\`' + sheet2.getCellByA1('H6').formattedValue + ' (' + abbreviateNumber(sheet2.getCellByA1('H5').formattedValue) + ') \n' +
-                '\`INCAPACITATIONS:\`' + sheet2.getCellByA1('K6').formattedValue + ' (' + abbreviateNumber(sheet2.getCellByA1('K5').formattedValue) + ') \n' +
-                '\`FIRES:\`' + sheet2.getCellByA1('N6').formattedValue + ' (' + abbreviateNumber(sheet2.getCellByA1('N5').formattedValue) + ') \n' +
-                '\`SECONDARY HITS:\`' + sheet2.getCellByA1('Q6').formattedValue + ' (' + abbreviateNumber(sheet2.getCellByA1('Q5').formattedValue) + ') \n' +
-                '\`AIRPLANE KILLS:\`' + sheet2.getCellByA1('T6').formattedValue + ' (' + abbreviateNumber(sheet2.getCellByA1('T5').formattedValue) + ') \n' +
-                '\`TORPS:\`' + sheet2.getCellByA1('W6').formattedValue + ' (' + abbreviateNumber(sheet2.getCellByA1('W5').formattedValue) + ') \n' +
-                '\`FLOODS:\`' + sheet2.getCellByA1('Z6').formattedValue + ' (' + abbreviateNumber(sheet2.getCellByA1('Z5').formattedValue) + ') \n' +
-                '\`SUB HITS:\`' + sheet2.getCellByA1('AC6').formattedValue + ' (' + abbreviateNumber(sheet2.getCellByA1('AC5').formattedValue) + ') \n' +
-                '\`AIRSTRIKE:\`' + sheet2.getCellByA1('AF6').formattedValue + ' (' + abbreviateNumber(sheet2.getCellByA1('AF5').formattedValue) + ') \n' +
-                '\`SPOTS:\`' + sheet2.getCellByA1('AI6').formattedValue + ' (' + abbreviateNumber(sheet2.getCellByA1('AI5').formattedValue) + ') \n' +
-                '\`CAPS/DEFENDED/ASSIST:\`' + sheet2.getCellByA1('AL6').formattedValue + ' (' + abbreviateNumber(sheet2.getCellByA1('AL5').formattedValue) + ') \n' +
-                '\`BASE-XP (≤T7):\`' + sheet2.getCellByA1('AO6').formattedValue + ' (' + sheet2.getCellByA1('AO5').formattedValue + ') \n' +
-                '\`DAMAGE (≤T7):\`' + sheet2.getCellByA1('AR6').formattedValue + ' (' + abbreviateNumber(sheet2.getCellByA1('AR5').formattedValue) + ') \n' +
-                '\`TANKED DAMAGE:\`' + sheet2.getCellByA1('BA6').formattedValue + ' (' + abbreviateNumber(sheet2.getCellByA1('BA5').formattedValue) + ') \n' +
-                '\`SPOTTING DAMAGE:\`' + sheet2.getCellByA1('BD6').formattedValue + ' (' + abbreviateNumber(sheet2.getCellByA1('BD5').formattedValue) + ') \n'
+                '\`DAMAGE:\`' + sheetDD_4.getCellByA1('AU6').formattedValue + ' (' + abbreviateNumber(sheetDD_4.getCellByA1('AU5').formattedValue) + ') \n' +
+                '\`BXP:\`' + sheetDD_4.getCellByA1('AX6').formattedValue + ' (' + sheetDD_4.getCellByA1('AX5').formattedValue + ') \n' +
+                '\`KILLS:\`' + sheetDD_4.getCellByA1('B6').formattedValue + ' (' + abbreviateNumber(sheetDD_4.getCellByA1('B5').formattedValue) + ') \n' +
+                '\`MBH:\`' + sheetDD_4.getCellByA1('E6').formattedValue + ' (' + abbreviateNumber(sheetDD_4.getCellByA1('E5').formattedValue) + ') \n' +
+                '\`CITADELS:\`' + sheetDD_4.getCellByA1('H6').formattedValue + ' (' + abbreviateNumber(sheetDD_4.getCellByA1('H5').formattedValue) + ') \n' +
+                '\`INCAPACITATIONS:\`' + sheetDD_4.getCellByA1('K6').formattedValue + ' (' + abbreviateNumber(sheetDD_4.getCellByA1('K5').formattedValue) + ') \n' +
+                '\`FIRES:\`' + sheetDD_4.getCellByA1('N6').formattedValue + ' (' + abbreviateNumber(sheetDD_4.getCellByA1('N5').formattedValue) + ') \n' +
+                '\`SECONDARY HITS:\`' + sheetDD_4.getCellByA1('Q6').formattedValue + ' (' + abbreviateNumber(sheetDD_4.getCellByA1('Q5').formattedValue) + ') \n' +
+                '\`AIRPLANE KILLS:\`' + sheetDD_4.getCellByA1('T6').formattedValue + ' (' + abbreviateNumber(sheetDD_4.getCellByA1('T5').formattedValue) + ') \n' +
+                '\`TORPS:\`' + sheetDD_4.getCellByA1('W6').formattedValue + ' (' + abbreviateNumber(sheetDD_4.getCellByA1('W5').formattedValue) + ') \n' +
+                '\`FLOODS:\`' + sheetDD_4.getCellByA1('Z6').formattedValue + ' (' + abbreviateNumber(sheetDD_4.getCellByA1('Z5').formattedValue) + ') \n' +
+                '\`SUB HITS:\`' + sheetDD_4.getCellByA1('AC6').formattedValue + ' (' + abbreviateNumber(sheetDD_4.getCellByA1('AC5').formattedValue) + ') \n' +
+                // '\`AIRSTRIKE:\`' + sheetDD_4.getCellByA1('AF6').formattedValue + ' (' + abbreviateNumber(sheetDD_4.getCellByA1('AF5').formattedValue) + ') \n' +
+                '\`SPOTS:\`' + sheetDD_4.getCellByA1('AI6').formattedValue + ' (' + abbreviateNumber(sheetDD_4.getCellByA1('AI5').formattedValue) + ') \n' +
+                '\`CAPS/DEFENDED/ASSIST:\`' + sheetDD_4.getCellByA1('AL6').formattedValue + ' (' + abbreviateNumber(sheetDD_4.getCellByA1('AL5').formattedValue) + ') \n' +
+                '\`BASE-XP (≤T7):\`' + sheetDD_4.getCellByA1('AO6').formattedValue + ' (' + sheetDD_4.getCellByA1('AO5').formattedValue + ') \n' +
+                '\`DAMAGE (≤T7):\`' + sheetDD_4.getCellByA1('AR6').formattedValue + ' (' + abbreviateNumber(sheetDD_4.getCellByA1('AR5').formattedValue) + ') \n' +
+                '\`TANKED DAMAGE:\`' + sheetDD_4.getCellByA1('BA6').formattedValue + ' (' + abbreviateNumber(sheetDD_4.getCellByA1('BA5').formattedValue) + ') \n' +
+                '\`SPOTTING DAMAGE:\`' + sheetDD_4.getCellByA1('BD6').formattedValue + ' (' + abbreviateNumber(sheetDD_4.getCellByA1('BD5').formattedValue) + ') \n'
             ;
             ddScoreBoardEmbed.setTitle('[CANUK] DD LEADERBOARD');
             ddScoreBoardEmbed.setColor('#17242c');
@@ -73,7 +73,7 @@ module.exports = {
         try {
             bot.channels.cache.get('841438933824569375').messages.fetch('928438776760500244').then((x) => {
                 x.edit('Updating the DD Scoreboard...').then(() => {
-                    sheet2.loadCells('A1:BD500').then(() => {
+                    sheetDD_4.loadCells('A1:BD500').then(() => {
                         x.edit('DD Scoreboard:');
                         x.edit(getDDScoreboardEmbed());
                     })
@@ -85,7 +85,7 @@ module.exports = {
             bot.channels.cache.get('802071947088625694').send('Oi some idiot deleted the original pinned leaderboard. Make sure you replace the fetch id with the new one in the code!');
             bot.channels.cache.get('841438933824569375').send.then((x) => {
                 x.edit('Updating scoreboard...').then(() => {
-                    sheet2.loadCells('A1:BD500').then(() => {
+                    sheetDD_4.loadCells('A1:BD500').then(() => {
                         x.edit('DD Scoreboard:');
                         x.edit(getDDScoreboardEmbed());
                     })

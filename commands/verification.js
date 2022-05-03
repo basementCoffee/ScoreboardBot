@@ -45,28 +45,15 @@ module.exports = {
                         await gsUpdateDevAdd(data.commanderName, data.val, data.sheetCol1, data.sheetCol2, data.startingRowNumber, data.sheetName);
                         await new Promise(res => setTimeout(res, 5000));
                         if (whichBoard === 0) {
-                            console.log("POOBA:" + whichBoard + isDevMode);
                             bot.commands.get('bbdevscores').execute(message, args, bot);
-                            //isDevMode = true;
-                            //console.log("ROOBA:" + whichBoard + isDevMode);
-                            // TBD: are all of these whichBoard = 6 necessary?
-                            //whichBoard = 6;
                         } else if (whichBoard === 1) {
-                            bot.commands.get('dev_cruiserscores').execute(message, args, bot);
-                            console.log(whichBoard);
-                            whichBoard = 6;
+                            bot.commands.get('cruiserdevscores').execute(message, args, bot);
                         } else if (whichBoard === 2) {
-                            bot.commands.get('dev_ddscores').execute(message, args, bot, isDevMode, ADMIN_ID);
-                            console.log(whichBoard);
-                            whichBoard = 6;
+                            bot.commands.get('dddevscores').execute(message, args, bot);
                         } else if (whichBoard === 3) {
-                            bot.commands.get('dev_cvscores').execute(message, args, bot, isDevMode, ADMIN_ID);
-                            console.log(whichBoard);
-                            whichBoard = 6;
+                            bot.commands.get('cvdevscores').execute(message, args, bot);
                         } else if (whichBoard === 5) {
-                            bot.commands.get('dev_universalscores').execute(message, args, bot, isDevMode, ADMIN_ID);
-                            console.log(whichBoard);
-                            whichBoard = 6;
+                            bot.commands.get('universaldevscores').execute(message, args, bot);
                         }
                         message.react('👍').then();
                         let reply = 'Added to sheet. #leaderboard-scores is updated.';
