@@ -168,7 +168,7 @@ module.exports = {
             let valueDifferenceHS = highScore - entryValue;
             let valueDifferenceNewHS = entryValue - highScore;
             if (highScore > entryValue) {
-                sendNotHighScoreMessage(message, commanderName, valueDifferenceHS);
+                await sendNotHighScoreMessage(message, commanderName, valueDifferenceHS);
                 gsUpdateAdd(commanderName, entryValue, sheetCol1, sheetCol2, 10);
             } else if (highScore < entryValue) {
                 let prevMessage = await sendHighScoreMessage(message, commanderName, valueDifferenceNewHS);
@@ -205,11 +205,11 @@ module.exports = {
             let valueDifferenceHS = devhighScore - entryValue;
             let valueDifferenceNewHS = entryValue - devhighScore;
             if (devhighScore > entryValue) {
-                sendNotHighScoreMessage(message, commanderName, valueDifferenceHS);
+                await sendNotHighScoreMessage(message, commanderName, valueDifferenceHS);
                 gsUpdateDevAdd(commanderName, entryValue, sheetCol1, sheetCol2, 10);
             } else if (devhighScore < entryValue) {
                 let prevMessage = await sendHighScoreMessage(message, commanderName, valueDifferenceNewHS);
-                whichBoard = 0;
+                whichBoard = 1;
                 isDevMode = true;
                 verification.execute(message, args, Discord, bot,  {
                     commanderName,
@@ -222,7 +222,7 @@ module.exports = {
                 }, whichBoard, isDevMode, ADMIN_ID);
             } else if (devhighScore === entryValue) {
                 message.channel.send("It's a tie!");
-                whichBoard = 0;
+                whichBoard = 1;
                 isDevMode = true;
                 verification.execute(message, args, Discord, bot, {
                     commanderName,

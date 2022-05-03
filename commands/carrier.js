@@ -157,12 +157,12 @@ module.exports = {
       let valueDifferenceHS = highScore - entryValue;
       let valueDifferenceNewHS = entryValue - highScore;
       if (highScore > entryValue) {
-        sendNotHighScoreMessage(message, commanderName, valueDifferenceHS);
+        await sendNotHighScoreMessage(message, commanderName, valueDifferenceHS);
         gsUpdateAdd(commanderName, entryValue, sheetCol1, sheetCol2, 10);
       } else if (highScore < entryValue) {
         let prevMessage = await sendHighScoreMessage(message, commanderName, valueDifferenceNewHS);
         // Passes on to verification which board to update
-        whichBoard = 0;
+        whichBoard = 6;
         verification.execute(message, args, Discord, bot,  {
           commanderName,
           val: entryValue,
@@ -171,10 +171,10 @@ module.exports = {
           startingRowNumber: 10,
           sheetName: 'NEWCV',
           prevMessage
-        }, whichBoard);
+        }, whichBoard, isDevMode, ADMIN_ID);
       } else if (highScore === entryValue) {
         message.channel.send("It's a tie!");
-        whichBoard = 0;
+        whichBoard = 6;
         verification.execute(message, args, Discord, bot, {
           commanderName,
           val: entryValue,
@@ -182,24 +182,22 @@ module.exports = {
           sheetCol2,
           startingRowNumber: 10,
           sheetName: 'NEWCV'
-        }, whichBoard);
+        }, whichBoard, isDevMode, ADMIN_ID);
       }
     }
 
     async function addEntryToDevSheet(sheetCol1, sheetCol2) {
-      // Change below for each type
       let devhighScore = devsheetCV_7.getCellByA1(sheetCol2 + 5).formattedValue;
       devhighScore = parseInt(devhighScore);
       entryValue = Math.abs(entryValue);
       let valueDifferenceHS = devhighScore - entryValue;
       let valueDifferenceNewHS = entryValue - devhighScore;
       if (devhighScore > entryValue) {
-        sendNotHighScoreMessage(message, commanderName, valueDifferenceHS);
+        await sendNotHighScoreMessage(message, commanderName, valueDifferenceHS);
         gsUpdateDevAdd(commanderName, entryValue, sheetCol1, sheetCol2, 10);
       } else if (devhighScore < entryValue) {
         let prevMessage = await sendHighScoreMessage(message, commanderName, valueDifferenceNewHS);
-        // Passes on to verification which board to update
-        whichBoard = 0;
+        whichBoard = 7;
         verification.execute(message, args, Discord, bot,  {
           commanderName,
           val: entryValue,
@@ -208,10 +206,10 @@ module.exports = {
           startingRowNumber: 10,
           sheetName: 'DEV_CV',
           prevMessage
-        }, whichBoard);
+        }, whichBoard, isDevMode, ADMIN_ID);
       } else if (devhighScore === entryValue) {
         message.channel.send("It's a tie!");
-        whichBoard = 0;
+        whichBoard = 7;
         verification.execute(message, args, Discord, bot, {
           commanderName,
           val: entryValue,
@@ -219,7 +217,7 @@ module.exports = {
           sheetCol2,
           startingRowNumber: 10,
           sheetName: 'DEV_CV'
-        }, whichBoard);
+        }, whichBoard, isDevMode, ADMIN_ID);
       }
     }
   }

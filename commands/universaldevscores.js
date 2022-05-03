@@ -16,7 +16,7 @@ const {
 // Initialize the sheet
 
 var doc = new GoogleSpreadsheet(spreadsheet_id);
-var sheet5;
+var devsheetUNV_11;
 
 
 (async function () {
@@ -31,20 +31,20 @@ async function initializeAuth() {
     });
     await doc.loadInfo(); // loads document properties and worksheets
     console.log(doc.title); // title of the sheet
-    sheet5 = await doc.sheetsByIndex[10];
+    devsheetUNV_11 = await doc.sheetsByIndex[11];
 }
 
 
 module.exports = {
     name: 'universaldevscores',
     description: "Universal Categories Scoreboard!",
-    execute(message, args, bot, isDevMode, ADMIN_ID) {
+    execute(message, args, bot) {
         const getUniversalScoreboardEmbed = () => {
             const universalScoreBoardEmbed = new MessageEmbed();
             const description =
                 '\n-----------  **UNIVERSAL CATEGORIES**  -----------\n' +
-                '\`BXP (CO-OP):\`' + sheet5.getCellByA1('B6').formattedValue + ' (' + sheet5.getCellByA1('B5').formattedValue + ') \n' +
-                '\`KILL STEALS:\`' + sheet5.getCellByA1('E6').formattedValue + ' (' + abbreviateNumber(sheet5.getCellByA1('E5').formattedValue) + ') \n'
+                '\`BXP (CO-OP):\`' + devsheetUNV_11.getCellByA1('B6').formattedValue + ' (' + devsheetUNV_11.getCellByA1('B5').formattedValue + ') \n' +
+                '\`KILL STEALS:\`' + devsheetUNV_11.getCellByA1('E6').formattedValue + ' (' + abbreviateNumber(devsheetUNV_11.getCellByA1('E5').formattedValue) + ') \n'
             ;
             universalScoreBoardEmbed.setTitle('[CANUK] Universal Categories LEADERBOARD');
             universalScoreBoardEmbed.setColor('#ffffff');
@@ -52,9 +52,9 @@ module.exports = {
             return universalScoreBoardEmbed;
         }
         try {
-            bot.channels.cache.get('841438933824569375').messages.fetch('928438781802070036').then((x) => {
+            bot.channels.cache.get('970432185737822318').messages.fetch('970463810454450186').then((x) => {
                 x.edit('Updating the Universal Categories Scoreboard...').then(() => {
-                    sheet5.loadCells('A1:E500').then(() => {
+                    devsheetUNV_11.loadCells('A1:E500').then(() => {
                         x.edit('Universal Categories Scoreboard:');
                         x.edit(getUniversalScoreboardEmbed());
                     })
@@ -63,10 +63,10 @@ module.exports = {
         }
         catch (e) {
             console.log('Cannot find the the scoreboard embed.');
-            bot.channels.cache.get('802071947088625694').send('Oi some idiot deleted the original pinned leaderboard. Make sure you replace the fetch id with the new one in the code!');
-            bot.channels.cache.get('841438933824569375').send.then((x) => {
+            bot.channels.cache.get('970471187480207440').send('Oi some idiot deleted the original pinned leaderboard. Make sure you replace the fetch id with the new one in the code!');
+            bot.channels.cache.get('970432185737822318').send.then((x) => {
                 x.edit('Updating scoreboard...').then(() => {
-                    sheet5.loadCells('A1:E500').then(() => {
+                    devsheetUNV_11.loadCells('A1:E500').then(() => {
                         x.edit('Universal Categories Scoreboard:');
                         x.edit(getUniversalScoreboardEmbed());
                     })

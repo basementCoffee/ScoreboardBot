@@ -43,7 +43,7 @@ let isDevMode = false;
 
 
 // whichBoard allows verification to update just the corresponding score board embed; option is defaulted to updating all of them as per legacy
-// 0 is bb, 1 is dd, and so on; 6 is all
+// 0 is bb, 1 is bbdev, 2 is cruiser, 3 is cruiserdev and so on; 12 is all
 var whichBoard;
 
 
@@ -187,10 +187,12 @@ bot.on('message', message => {
         break;
         case 'cv':
             if (isDevMode === true && message.member.id === ADMIN_ID) {
+                console.log(isDevMode);
                 devsheetCV_7.loadCells('A1:AX500').then(() =>
                     bot.commands.get('carrier').execute(message, args, Discord, GoogleApis, GoogleSpreadsheet, doc, GoogleSpreadsheetWorksheet, sheetCV_6, devsheetCV_7, bot, whichBoard, isDevMode, ADMIN_ID)
                 );
             } else {
+                console.log(isDevMode);
                 sheetCV_6.loadCells('A1:AX500').then(() =>
                     bot.commands.get('carrier').execute(message, args, Discord, GoogleApis, GoogleSpreadsheet, doc, GoogleSpreadsheetWorksheet, sheetCV_6, devsheetCV_7, bot, whichBoard, isDevMode, ADMIN_ID)
                 );
@@ -224,15 +226,17 @@ bot.on('message', message => {
         case 'dev':
         case 'devmode':
             if (message.member.id !== ADMIN_ID) {
-                message.channel.send('This feature has been limited to Admins only.')
+                message.channel.send('This feature has been limited to Admins only.');
                 return;
             }
             if (isDevMode) {
                 message.channel.send('*devmode is off*');
                 isDevMode = false;
+                message.channel.send("Supposed to say false ->" + isDevMode);
             } else {
                 message.channel.send('*devmode is on*');
                 isDevMode = true;
+                message.channel.send("Supposed to say true ->" + isDevMode);
             }
         break;
         case 'scores':

@@ -2,25 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="99b4a35b-82f0-4dbf-b247-e3b3f481f961" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/ScoreboardBot.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/commands/cruiserdevscores.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/commands/cvdevscores.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/commands/dddevscores.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/commands/universaldevscores.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/bbdevscores.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/bbdevscores.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/bbscores.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/bbscores.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/bbscoresdev.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/cruiserscores.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/cruiserscores.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/cvscores.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/cvscores.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/ddscores.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/ddscores.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/commands/battleship.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/battleship.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/commands/carrier.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/carrier.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/commands/cruiser.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/cruiser.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/commands/destroyer.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/destroyer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/commands/universal.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/universal.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/commands/universaldevscores.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/universaldevscores.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/commands/universalscores.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/universalscores.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/commands/verification.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/verification.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/.package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -92,7 +83,7 @@
       <option name="presentableId" value="Default" />
       <updated>1651464932734</updated>
       <workItem from="1651464936388" duration="6583000" />
-      <workItem from="1651498651250" duration="9416000" />
+      <workItem from="1651498651250" duration="14927000" />
     </task>
     <servers />
   </component>

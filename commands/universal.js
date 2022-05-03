@@ -7,6 +7,7 @@ const {google, GoogleApis} = require('googleapis');
 const verification = require('./verification');
 const Discord = require("discord.js");
 const {GoogleSpreadsheet, GoogleSpreadsheetWorksheet} = require("google-spreadsheet");
+const {sendNotHighScoreMessage, sendHighScoreMessage} = require("./utils/utils");
 const client2 = new google.auth.JWT(client_email, null, private_key, [
   'https://www.googleapis.com/auth/spreadsheets'
 ]);
@@ -46,7 +47,7 @@ module.exports = {
      * @param sheetCol2 The value column letter
      */
 
-    function addEntryToSheetBXP(sheetCol1, sheetCol2) {
+    async function addEntryToSheetBXP(sheetCol1, sheetCol2) {
       if (isDevMode === true && message.member.id === ADMIN_ID) {
         let highScore = devsheetUNV_11.getCellByA1(sheetCol2 + 5).formattedValue;
         highScore = parseInt(highScore);
@@ -54,30 +55,30 @@ module.exports = {
         let valueDifferenceHS = highScore - entryValue;
         let valueDifferenceNewHS = entryValue - highScore;
         if (highScore > entryValue) {
-          message.channel.send('Sorry ' + commanderName + ', you are ' + Math.abs(valueDifferenceHS) + ' from the current high score!');
+          await sendNotHighScoreMessage(message, commanderName, valueDifferenceHS);
           gsUpdateAdd(commanderName, entryValue, sheetCol1, sheetCol2, 10);
         } else if (highScore < entryValue) {
-          message.channel.send('Well done ' + commanderName + '! Your entry is the new high score by a margin of ' + Math.abs(valueDifferenceNewHS) + '!\nThis high score has been forwarded to a commander for verification.');
-          whichBoard = 5;
+          let prevMessage = await sendHighScoreMessage(message, commanderName, valueDifferenceNewHS);
+          whichBoard = 9;
           verification.execute(message, args, Discord, bot, {
             commanderName,
             val: entryValue,
             sheetCol1,
             sheetCol2,
             startingRowNumber: 10,
-            sheetName: 'NEWUNIVERSAL'
-          }, whichBoard);
+            sheetName: 'DEV_UNIVERSAL'
+          }, whichBoard, isDevMode, ADMIN_ID);
         } else if (highScore === entryValue) {
           message.channel.send("It's a tie!");
-          whichBoard = 5;
+          whichBoard = 9;
           verification.execute(message, args, Discord, bot, {
             commanderName,
             val: entryValue,
             sheetCol1,
             sheetCol2,
             startingRowNumber: 10,
-            sheetName: 'NEWUNIVERSAL'
-          }, whichBoard);
+            sheetName: 'DEV_UNIVERSAL'
+          }, whichBoard, isDevMode, ADMIN_ID);
         }
       } else {
           let highScore = sheetUNV_10.getCellByA1(sheetCol2 + 5).formattedValue;
@@ -86,11 +87,11 @@ module.exports = {
           let valueDifferenceHS = highScore - entryValue;
           let valueDifferenceNewHS = entryValue - highScore;
           if (highScore > entryValue) {
-            message.channel.send('Sorry ' + commanderName + ', you are ' + Math.abs(valueDifferenceHS) + ' from the current high score!');
+            await sendNotHighScoreMessage(message, commanderName, valueDifferenceHS);
             gsUpdateAdd(commanderName, entryValue, sheetCol1, sheetCol2, 10);
           } else if (highScore < entryValue) {
-            message.channel.send('Well done ' + commanderName + '! Your entry is the new high score by a margin of ' + Math.abs(valueDifferenceNewHS) + '!\nThis high score has been forwarded to a commander for verification.');
-            whichBoard = 5;
+            let prevMessage = await sendHighScoreMessage(message, commanderName, valueDifferenceNewHS);
+            whichBoard = 8;
             verification.execute(message, args, Discord, bot, {
               commanderName,
               val: entryValue,
@@ -98,10 +99,10 @@ module.exports = {
               sheetCol2,
               startingRowNumber: 10,
               sheetName: 'DEV_UNIVERSAL'
-            }, whichBoard);
+            }, whichBoard, isDevMode, ADMIN_ID);
           } else if (highScore === entryValue) {
             message.channel.send("It's a tie!");
-            whichBoard = 5;
+            whichBoard = 8;
             verification.execute(message, args, Discord, bot, {
               commanderName,
               val: entryValue,
@@ -109,41 +110,43 @@ module.exports = {
               sheetCol2,
               startingRowNumber: 10,
               sheetName: 'DEV_UNIVERSAL'
-            }, whichBoard);
+            }, whichBoard, isDevMode, ADMIN_ID);
           }
       }
     }
 
-    function addEntryToSheetKILLSTEAL(sheetCol1, sheetCol2) {
+    async function addEntryToSheetKILLSTEAL(sheetCol1, sheetCol2) {
       if (isDevMode === true && message.member.id === ADMIN_ID) {
         let highScore = devsheetUNV_11.getCellByA1(sheetCol2 + 5).formattedValue;
         highScore = parseInt(highScore);
         entryValue = Math.abs(entryValue);
-        let valueDifferenceHS = entryValue - highScore;
-        let valueDifferenceNewHS = highScore - entryValue;
+        let valueDifferenceHS = highScore - entryValue;
+        let valueDifferenceNewHS = entryValue - highScore;
         if (entryValue > highScore) {
-          message.channel.send('Sorry ' + commanderName + ', you are ' + Math.abs(valueDifferenceHS) + ' from the current high score!');
+          await sendNotHighScoreMessage(message, commanderName, valueDifferenceHS);
           gsUpdateAdd(commanderName, entryValue, sheetCol1, sheetCol2, 10);
         } else if (entryValue < highScore) {
-          message.channel.send('Well done ' + commanderName + '! Your entry is the new high score by a margin of ' + Math.abs(valueDifferenceNewHS) + '!\nThis high score has been forwarded to a commander for verification.');
+          let prevMessage = await sendHighScoreMessage(message, commanderName, valueDifferenceNewHS);
+          whichBoard = 9;
           verification.execute(message, args, Discord, bot, {
             commanderName,
             val: entryValue,
             sheetCol1,
             sheetCol2,
             startingRowNumber: 10,
-            sheetName: 'NEWUNIVERSAL'
-          });
+            sheetName: 'DEV_UNIVERSAL'
+          }, whichBoard, isDevMode, ADMIN_ID);
         }else if (highScore === entryValue) {
           message.channel.send("It's a tie!");
+          whichBoard = 9;
           verification.execute(message, args, Discord, bot, {
             commanderName,
             val: entryValue,
             sheetCol1,
             sheetCol2,
             startingRowNumber: 10,
-            sheetName: 'NEWUNIVERSAL'
-          });
+            sheetName: 'DEV_UNIVERSAL'
+          }, whichBoard, isDevMode, ADMIN_ID);
         }
       } else {
           let highScore = sheetUNV_10.getCellByA1(sheetCol2 + 5).formattedValue;
@@ -156,6 +159,7 @@ module.exports = {
             gsUpdateAdd(commanderName, entryValue, sheetCol1, sheetCol2, 10);
           } else if (entryValue < highScore) {
             message.channel.send('Well done ' + commanderName + '! Your entry is the new high score by a margin of ' + Math.abs(valueDifferenceNewHS) + '!\nThis high score has been forwarded to a commander for verification.');
+            whichBoard = 8;
             verification.execute(message, args, Discord, bot, {
               commanderName,
               val: entryValue,
@@ -166,6 +170,7 @@ module.exports = {
             });
           }else if (highScore === entryValue) {
             message.channel.send("It's a tie!");
+            whichBoard = 8;
             verification.execute(message, args, Discord, bot, {
               commanderName,
               val: entryValue,

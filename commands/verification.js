@@ -10,6 +10,7 @@ module.exports = {
     name: 'verification',
     description: "Verification ticket!",
     execute(message, args, Discord, bot, data, whichBoard, isDevMode, ADMIN_ID) {
+        console.log(isDevMode);
         const newEmbed = new Discord.MessageEmbed()
             .setColor('#76ee00')
             .setTitle('Click the below link to view entry and screenshots for verification')
@@ -17,6 +18,7 @@ module.exports = {
             .setFooter('React with a X or check and the spreadsheet will update accordingly');
         // Checks to see if entry is from admin & devmode is enabled
         if (isDevMode === true && message.member.id === ADMIN_ID) {
+            console.log ("A");
             // 970432070956486797 -> dev verification channel id
             bot.channels.cache.get('970432070956486797').send(newEmbed).then(a => {
                 a.react('613845951055921158');
@@ -43,16 +45,23 @@ module.exports = {
                         // TypeError: Cannot read properties of undefined (reading 'execute') maybe needs to be in an await?
 
                         await gsUpdateDevAdd(data.commanderName, data.val, data.sheetCol1, data.sheetCol2, data.startingRowNumber, data.sheetName);
-                        await new Promise(res => setTimeout(res, 5000));
-                        if (whichBoard === 0) {
+                        await new Promise(res => setTimeout(res, 2000));
+                        console.log(whichBoard + " " + isDevMode);
+                        if (whichBoard === 1) {
                             bot.commands.get('bbdevscores').execute(message, args, bot);
-                        } else if (whichBoard === 1) {
-                            bot.commands.get('cruiserdevscores').execute(message, args, bot);
-                        } else if (whichBoard === 2) {
-                            bot.commands.get('dddevscores').execute(message, args, bot);
                         } else if (whichBoard === 3) {
-                            bot.commands.get('cvdevscores').execute(message, args, bot);
+                            bot.commands.get('cruiserdevscores').execute(message, args, bot);
                         } else if (whichBoard === 5) {
+                            bot.commands.get('dddevscores').execute(message, args, bot);
+                        } else if (whichBoard === 7) {
+                            bot.commands.get('cvdevscores').execute(message, args, bot);
+                        } else if (whichBoard === 9) {
+                            bot.commands.get('universaldevscores').execute(message, args, bot);
+                        } else if (whichBoard == undefined) {
+                            bot.commands.get('bbdevscores').execute(message, args, bot);
+                            bot.commands.get('cruiserdevscores').execute(message, args, bot);
+                            bot.commands.get('dddevscores').execute(message, args, bot);
+                            bot.commands.get('cvdevscores').execute(message, args, bot);
                             bot.commands.get('universaldevscores').execute(message, args, bot);
                         }
                         message.react('👍').then();
@@ -77,7 +86,8 @@ module.exports = {
                 });
             })
         } else {
-            console.log(isDevMode + whichBoard)
+            console.log ("B");
+            console.log(isDevMode + whichBoard);
             bot.channels.cache.get('803893512072462347').send(newEmbed).then(a => {
                 a.react('613845951055921158');
                 a.react('613845951341395977');
@@ -103,22 +113,28 @@ module.exports = {
                             bot.commands.get('bbscores').execute(message, args, bot);
                             console.log(whichBoard);
                             whichBoard = 6;
-                        } else if (whichBoard === 1) {
+                        } else if (whichBoard === 2) {
                             bot.commands.get('cruiserscores').execute(message, args, bot);
                             console.log(whichBoard);
                             whichBoard = 6;
-                        } else if (whichBoard === 2) {
+                        } else if (whichBoard === 4) {
                             bot.commands.get('ddscores').execute(message, args, bot);
                             console.log(whichBoard);
                             whichBoard = 6;
-                        } else if (whichBoard === 3) {
+                        } else if (whichBoard === 6) {
                             bot.commands.get('cvscores').execute(message, args, bot);
                             console.log(whichBoard);
                             whichBoard = 6;
-                        } else if (whichBoard === 5) {
+                        } else if (whichBoard === 8) {
                             bot.commands.get('universalscores').execute(message, args, bot);
                             console.log(whichBoard);
                             whichBoard = 6;
+                        } else if (whichBoard == undefined) {
+                            bot.commands.get('bbscores').execute(message, args, bot);
+                            bot.commands.get('cruiserscores').execute(message, args, bot);
+                            bot.commands.get('ddscores').execute(message, args, bot);
+                            bot.commands.get('cvscores').execute(message, args, bot);
+                            bot.commands.get('universalscores').execute(message, args, bot);
                         }
                         message.react('👍').then();
                         let reply = 'Added to sheet. #leaderboard-scores is updated.';
