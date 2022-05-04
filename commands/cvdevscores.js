@@ -55,7 +55,7 @@ module.exports = {
                 '\`TORPS:\`' + devsheetCV_7.getCellByA1('T6').formattedValue + ' (' + abbreviateNumber(devsheetCV_7.getCellByA1('T5').formattedValue) + ') \n' +
                 '\`FLOODS:\`' + devsheetCV_7.getCellByA1('W6').formattedValue + ' (' + abbreviateNumber(devsheetCV_7.getCellByA1('W5').formattedValue) + ') \n' +
                 '\`TARGET HITS:\`' + devsheetCV_7.getCellByA1('Z6').formattedValue + ' (' + abbreviateNumber(devsheetCV_7.getCellByA1('Z5').formattedValue) + ') \n' +
-                '\`SPOTS:\`' + devsheetCV_7.getCellByA1('AB6').formattedValue + ' (' + abbreviateNumber(devsheetCV_7.getCellByA1('AB5').formattedValue) + ') \n' +
+                '\`SPOTS:\`' + devsheetCV_7.getCellByA1('AC6').formattedValue + ' (' + abbreviateNumber(devsheetCV_7.getCellByA1('AC5').formattedValue) + ') \n' +
                 '\`CAPS/DEFENDED/ASSIST:\`' + devsheetCV_7.getCellByA1('AF6').formattedValue + ' (' + abbreviateNumber(devsheetCV_7.getCellByA1('AF5').formattedValue) + ') \n' +
                 '\`BASE-XP (≤T7):\`' + devsheetCV_7.getCellByA1('AI6').formattedValue + ' (' + devsheetCV_7.getCellByA1('AI5').formattedValue + ') \n' +
                 '\`DAMAGE (≤T7):\`' + devsheetCV_7.getCellByA1('AL6').formattedValue + ' (' + abbreviateNumber(devsheetCV_7.getCellByA1('AL5').formattedValue) + ') \n' +

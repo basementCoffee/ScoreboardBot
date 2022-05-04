@@ -55,7 +55,7 @@ module.exports = {
                 '\`TORPS:\`' + sheetCV_6.getCellByA1('T6').formattedValue + ' (' + abbreviateNumber(sheetCV_6.getCellByA1('T5').formattedValue) + ') \n' +
                 '\`FLOODS:\`' + sheetCV_6.getCellByA1('W6').formattedValue + ' (' + abbreviateNumber(sheetCV_6.getCellByA1('W5').formattedValue) + ') \n' +
                 '\`TARGET HITS:\`' + sheetCV_6.getCellByA1('Z6').formattedValue + ' (' + abbreviateNumber(sheetCV_6.getCellByA1('Z5').formattedValue) + ') \n' +
-                '\`SPOTS:\`' + sheetCV_6.getCellByA1('AB6').formattedValue + ' (' + abbreviateNumber(sheetCV_6.getCellByA1('AB5').formattedValue) + ') \n' +
+                '\`SPOTS:\`' + sheetCV_6.getCellByA1('AC6').formattedValue + ' (' + abbreviateNumber(sheetCV_6.getCellByA1('AC5').formattedValue) + ') \n' +
                 '\`CAPS/DEFENDED/ASSIST:\`' + sheetCV_6.getCellByA1('AF6').formattedValue + ' (' + abbreviateNumber(sheetCV_6.getCellByA1('AF5').formattedValue) + ') \n' +
                 '\`BASE-XP (≤T7):\`' + sheetCV_6.getCellByA1('AI6').formattedValue + ' (' + sheetCV_6.getCellByA1('AI5').formattedValue + ') \n' +
                 '\`DAMAGE (≤T7):\`' + sheetCV_6.getCellByA1('AL6').formattedValue + ' (' + abbreviateNumber(sheetCV_6.getCellByA1('AL5').formattedValue) + ') \n' +
