@@ -3,13 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="99b4a35b-82f0-4dbf-b247-e3b3f481f961" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/battleship.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/battleship.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/carrier.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/carrier.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/cruiser.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/cruiser.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/destroyer.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/destroyer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/universal.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/universal.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/verification.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/verification.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/commands/help.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/help.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/commands/keys.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/commands/universaldevscores.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/universaldevscores.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

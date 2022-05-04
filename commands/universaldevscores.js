@@ -37,12 +37,12 @@ async function initializeAuth() {
 
 module.exports = {
     name: 'universaldevscores',
-    description: "Universal Categories Scoreboard!",
+    description: "UNIVERSAL CATEGORIES DEV SCOREBOARD!",
     execute(message, args, bot) {
         const getUniversalScoreboardEmbed = () => {
             const universalScoreBoardEmbed = new MessageEmbed();
             const description =
-                '\n-----------  **UNIVERSAL CATEGORIES**  -----------\n' +
+                '\n-----------  **UNIVERSAL DEV CATEGORIES**  -----------\n' +
                 '\`BXP (CO-OP):\`' + devsheetUNV_11.getCellByA1('B6').formattedValue + ' (' + devsheetUNV_11.getCellByA1('B5').formattedValue + ') \n' +
                 '\`KILL STEALS:\`' + devsheetUNV_11.getCellByA1('E6').formattedValue + ' (' + abbreviateNumber(devsheetUNV_11.getCellByA1('E5').formattedValue) + ') \n'
             ;

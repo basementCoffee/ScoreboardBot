@@ -8,10 +8,10 @@ module.exports = {
             .setURL('https://bit.ly/39XH7sO')
             .addFields({
                     name: 'Usage:',
-                    value: "Use **!canuk** as a prefix. To submit an entry, use the format: \n`!canuk [dd, bb, cruiser, cv, universal] [damage, fires, torps, etc.] [value]` \n**EXAMPLE**: \n`!canuk dd fires 10` \n"
+                    value: "Use **!canuk** as a prefix. To submit an entry, use the format: \n`!canuk [dd, bb, cruiser, cv, universal] [damage, fires, torps, etc.] [score]` \n**EXAMPLE**: \n`!canuk dd fires 10` \n"
                 }, {
-                    name: '----- **Categories and Accepted Keywords** -----',
-                    value: "**BB:** Damage, Kills, BXP, Secondary Hits, Citadels, MBH, Tanked Damage, Airplane kills, Fires, Caps/Defends/Assists, Incaps, BXP ≤ T7, Damage ≤ T7 \n \n**Cruiser:** Damage, Kills, BXP, Fires, Floods, Torp Hits, Citadels, MBH, Tanked Damage, Airplane Kills, Incaps, Cap/Defend/Assist, BXP ≤ T7, Damage ≤ T7 \n \n **DD:** Damage, Kills, BXP, Fires, Floods, Torp Hits, MBH, Tanked Damage, Airplane Kills, Incaps, Cap/Defend/Assist, Spotting Damage, BXP ≤ T7, Damage ≤ T7 \n \n **CV:** Damage, Kills, BXP, Citadels, Fires, Floods, Torp Hits, Airplane Kills, Incaps, Target Hits(Bomb/Rocket), BXP ≤ T7, Damage ≤ T7 \n \n **Universal Categories:** BXP(CO-OP), Lowest DMG Kill-Steal"
+                    name: '----- **Ship Categories & Keywords** -----',
+                    value: "__**BB**__ \n *KILLS, MBH, CITS, INCAPS, FIRES, SECONDARIES, PLANEKILLS, TORPS, FLOODS, SUBHITS, AIRSTRIKE, SPOTS, CAPS, T7BXP, T7DMG, DMG, BXP, TANKED, SPOTTINGDMG* \n \n__**Cruiser**__ \n *KILLS, MBH, CITS, INCAPS, FIRES, SECONDARIES, PLANEKILLS, TORPS, FLOODS, SUBHITS, AIRSTRIKE, SPOTS, CAPS, T7BXP, T7DMG, DMG, BXP, TANKED, SPOTTINGDMG* \n \n __**DD**__ \n *KILLS, MBH, CITS, INCAPS, FIRES, SECONDARIES, PLANEKILLS, TORPS, FLOODS, SUBHITS, SPOTS, CAPS, T7BXP, T7DMG, DMG, BXP, TANKED, SPOTTINGDMG* \n \n __**CV**__ \n *KILLS, CITS, INCAPS, FIRES, SECONDARIES, PLANEKILLS, TORPS, FLOODS, TARGETS, SPOTS, CAPS, T7BXP, T7DMG, DMG, BXP, TANKED, SPOTTINGDMG* \n \n __**Universal Categories**__ \n *COOPBXP, KILLSTEAL*"
                 }
             )
             .setThumbnail('https://i.pinimg.com/originals/e7/d3/20/e7d320f068eedc680a536d9351dfebab.jpg')

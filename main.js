@@ -39,7 +39,7 @@ var devsheetSUB_9;
 var sheetUNV_10;
 var devsheetUNV_11;
 const ADMIN_ID = ['268554823283113985', '443150640823271436', '160520338378194954'];
-let isDevMode = false;
+let isDevMode = process.argv[2] === '--dev';
 
 
 // whichBoard allows verification to update just the corresponding score board embed; option is defaulted to updating all of them as per legacy
@@ -202,7 +202,6 @@ bot.on('message', message => {
         case 'guide':
         case 'help':
             bot.commands.get('help').execute(message, args, Discord);
-            bot.commands.get('keys').execute(message, args, Discord);
         break;
         case 'info':
             message.channel.send("https://github.com/basementCoffee/ScoreboardBot");
@@ -212,22 +211,24 @@ bot.on('message', message => {
         break;
         case 'dev':
         case 'devmode':
-            if (message.member.id !== ADMIN_ID) {
+            if (!ADMIN_ID.includes(message.member.id)) {
                 message.channel.send('This feature has been limited to Admins only.');
                 return;
             }
-            if (isDevMode) {
+            if (args[0] === 'status'){
+                message.channel.send(`devmode is currently **${isDevMode ? 'on' : 'off'}**`);
+
+            }
+            else if (isDevMode) {
                 message.channel.send('*devmode is off*');
                 isDevMode = false;
-                message.channel.send("Supposed to say false -> " + isDevMode);
             } else {
                 message.channel.send('*devmode is on*');
                 isDevMode = true;
-                message.channel.send("Supposed to say true -> " + isDevMode);
             }
         break;
         case 'scores':
-            if (message.member.id !== ADMIN_ID) {
+            if (!ADMIN_ID.includes(message.member.id)) {
                 message.channel.send('This feature has been limited to Admins only.')
                 return;
             }
@@ -255,7 +256,7 @@ bot.on('message', message => {
             message.channel.send('Click me!', button);
         break;
         case 'add':
-            if (message.member.id !== ADMIN_ID) {
+            if (!ADMIN_ID.includes(message.member.id)) {
                 message.channel.send('This feature has been limited to Admins only.')
                 return;
             }
@@ -277,7 +278,7 @@ bot.on('message', message => {
         case 'devstrike':
         case 'update':
         case 'detonate':
-            if (message.member.id !== ADMIN_ID) {
+            if (!ADMIN_ID.includes(message.member.id)) {
                 message.channel.send('This feature has been limited to Admins only.')
                 return;
             }

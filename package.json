@@ -1,9 +1,11 @@
 {
   "name": "canukbot",
-  "version": "4.0.1",
+  "version": "4.0.2",
   "description": "[CANUK] ScoreboardBot",
   "main": "main.js",
   "scripts": {
+    "trace" : "node --trace-warnings .",
+    "dev": "node --trace-warnings main.js --dev",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
