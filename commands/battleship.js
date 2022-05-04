@@ -20,7 +20,7 @@ const gsapi = google.sheets({
 module.exports = {
     name: 'battleship',
     description: "battleship commands",
-    execute(message, args, Discord, GoogleApis, GoogleSpreadsheet, doc, GoogleSpreadsheetWorksheet, bot, whichBoard, isDevMode, ADMIN_ID) {
+    execute(message, args, Discord, GoogleApis, GoogleSpreadsheet, doc, GoogleSpreadsheetWorksheet, bot, sheetBB_0, devsheetBB_1, whichBoard, isDevMode, ADMIN_ID) {
         let type = args[0];
         let entryValue;
         let commanderName = (message.member.nickname ? message.member.nickname : message.member.user.username);
@@ -32,7 +32,7 @@ module.exports = {
         else {
             return message.channel.send("Sorry I don't recognize that command. Please check the pinned help guide on how to use the CANUKBot.");
         }
-        if (isDevMode === true && message.member.id === ADMIN_ID) {
+        if (isDevMode === true && ADMIN_ID.includes(message.member.id)) {
             switch (type) {
                 case 'kills':
                     addEntryToDevSheet('A', 'B');

@@ -17,7 +17,7 @@ module.exports = {
             .setDescription(message.url)
             .setFooter('React with a X or check and the spreadsheet will update accordingly');
         // Checks to see if entry is from admin & devmode is enabled
-        if (isDevMode === true && message.member.id === ADMIN_ID) {
+        if (isDevMode === true && ADMIN_ID.includes(message.member.id)) {
             console.log ("A");
             // 970432070956486797 -> dev verification channel id
             bot.channels.cache.get('970432070956486797').send(newEmbed).then(a => {

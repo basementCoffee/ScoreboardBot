@@ -20,7 +20,7 @@ const gsapi = google.sheets({
 module.exports = {
   name: 'universal',
   description: "universal commands",
-  execute(message, args, Discord, GoogleApis, GoogleSpreadsheet, doc, GoogleSpreadsheetWorksheet, bot, whichBoard, isDevMode, ADMIN_ID) {
+  execute(message, args, Discord, GoogleApis, GoogleSpreadsheet, doc, GoogleSpreadsheetWorksheet, bot, sheetUNV_10, devsheetUNV_11, whichBoard, isDevMode, ADMIN_ID) {
     let type = args[0];
     let entryValue;
     let commanderName = (message.member.nickname ? message.member.nickname : message.member.user.username);
@@ -48,7 +48,7 @@ module.exports = {
      */
 
     async function addEntryToSheetBXP(sheetCol1, sheetCol2) {
-      if (isDevMode === true && message.member.id === ADMIN_ID) {
+      if (isDevMode === true && ADMIN_ID.includes(message.member.id)) {
         let highScore = devsheetUNV_11.getCellByA1(sheetCol2 + 5).formattedValue;
         highScore = parseInt(highScore);
         entryValue = Math.abs(entryValue);
@@ -116,7 +116,7 @@ module.exports = {
     }
 
     async function addEntryToSheetKILLSTEAL(sheetCol1, sheetCol2) {
-      if (isDevMode === true && message.member.id === ADMIN_ID) {
+      if (isDevMode === true && ADMIN_ID.includes(message.member.id)) {
         let highScore = devsheetUNV_11.getCellByA1(sheetCol2 + 5).formattedValue;
         highScore = parseInt(highScore);
         entryValue = Math.abs(entryValue);
