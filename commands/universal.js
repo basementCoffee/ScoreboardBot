@@ -98,7 +98,7 @@ module.exports = {
               sheetCol1,
               sheetCol2,
               startingRowNumber: 10,
-              sheetName: 'DEV_UNIVERSAL'
+              sheetName: 'NEW_UNIVERSAL'
             }, whichBoard, isDevMode, ADMIN_ID);
           } else if (highScore === entryValue) {
             message.channel.send("It's a tie!");
@@ -109,7 +109,7 @@ module.exports = {
               sheetCol1,
               sheetCol2,
               startingRowNumber: 10,
-              sheetName: 'DEV_UNIVERSAL'
+              sheetName: 'NEW_UNIVERSAL'
             }, whichBoard, isDevMode, ADMIN_ID);
           }
       }
